@@ -23,11 +23,11 @@ simple_model = models_creator.create_simple_neural_model()
 # training
 batch_size = 64
 epochs = 1
-cnn_model.train(train_images, train_labels, epochs=epochs, number_of_samples=batch_size, verbose=1)
-simple_model.train(train_images, train_labels, epochs=epochs, number_of_samples=batch_size, verbose=1)
+cnn_model.train(train_images, train_labels, epochs=epochs, number_of_samples=batch_size, verbose=0)
+simple_model.train(train_images, train_labels, epochs=epochs, number_of_samples=batch_size, verbose=0)
 
 comparator = ModelComparator(test_images, test_labels)
 print("comparator")
-print(comparator.compare(cnn_model, simple_model, batch_size))
-print(comparator.compare(simple_model, cnn_model, batch_size))
-print(comparator.compare(simple_model, simple_model, batch_size))
+print(comparator.evaluate_compare(cnn_model, simple_model, batch_size))
+print(comparator.evaluate_compare(simple_model, cnn_model, batch_size))
+print(comparator.evaluate_compare(simple_model, simple_model, batch_size))

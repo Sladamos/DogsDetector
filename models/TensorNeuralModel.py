@@ -4,7 +4,7 @@ from tensorflow import keras
 
 class TensorNeuralModel(NeuralModel):
     def evaluate(self, test_set, test_labels, number_of_samples):
-        return self.model.evaluate(test_set, test_labels, batch_size=number_of_samples)
+        return self.model.evaluate(test_set, test_labels, batch_size=number_of_samples, verbose=0)
 
     def __init__(self):
         self.model = keras.models.Sequential()
