@@ -1,9 +1,12 @@
+from data.Data import Data
 from models.NeuralModel import NeuralModel
 from tensorflow import keras
 
 
 class TensorNeuralModel(NeuralModel):
-    def evaluate(self, test_set, test_labels, number_of_samples):
+    def evaluate(self, test_data, number_of_samples):
+        test_set = test_data.get_images()
+        test_labels = test_data.get_labels()
         return self.model.evaluate(test_set, test_labels, batch_size=number_of_samples, verbose=0)
 
     def __init__(self):
@@ -15,11 +18,13 @@ class TensorNeuralModel(NeuralModel):
     def save_to_file(self, file_name):
         self.model.save(file_name)
 
-    def train(self, training_set, validation_data, epochs, number_of_samples, callbacks=None, verbose=2):
+    def train(self, training_data, epochs, number_of_samples, callbacks=None, verbose=2):
+        training_set = training_data.get_images()
+        training_labels = training_data.get_labels()
         if callbacks is None:
-            self.model.fit(training_set, validation_data, batch_size=number_of_samples, epochs=epochs, verbose=verbose)
+            self.model.fit(training_set, training_labels, batch_size=number_of_samples, epochs=epochs, verbose=verbose)
         else:
-            self.model.fit(training_set, validation_data, batch_size=number_of_samples, epochs=epochs, verbose=verbose,
+            self.model.fit(training_set, training_labels, batch_size=number_of_samples, epochs=epochs, verbose=verbose,
                            callbacks=callbacks)
 
     def add_layer(self, layer):

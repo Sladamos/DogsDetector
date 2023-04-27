@@ -16,10 +16,12 @@ class NeuralModel:
         pass
 
     @abstractmethod
-    def train(self, training_set, validation_data, epochs, number_of_samples, callbacks):
+    def train(self, train_data, epochs, number_of_samples, callbacks):
         pass
 
     @abstractmethod
-    def evaluate(self, test_set, test_labels, number_of_samples):
+    def evaluate(self, test_data, number_of_samples):
         pass
+
+    # TODO: implement predict
 
