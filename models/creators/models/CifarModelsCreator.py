@@ -20,7 +20,7 @@ class CifarModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.createDenseLayer(10))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-        optim = keras.optimizers.Adam(lr=0.001)
+        optim = keras.optimizers.Adam(learning_rate=0.001)
         metrics = ["accuracy"]
         model.compile(optim, loss, metrics)
         return model
@@ -28,13 +28,12 @@ class CifarModelsCreator(ModelsCreator):
     def create_simple_neural_model(self):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
-        model.add_layer(layers_creator.createFlattenLayer())
-        keras.layers.Flatten(input_shape=(32, 32, 3)),
-        keras.layers.Dense(128, activation='relu'),
-        keras.layers.Dense(10),
+        model.add_layer(layers_creator.createFlattenLayer(input_shape=(32, 32, 3)))
+        model.add_layer(layers_creator.createDenseLayer(128, activation='relu'))
+        model.add_layer(layers_creator.createDenseLayer(10))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-        optim = keras.optimizers.Adam(lr=0.001)
+        optim = keras.optimizers.Adam(learning_rate=0.001)
         metrics = ["accuracy"]
         model.compile(optim, loss, metrics)
         return model
