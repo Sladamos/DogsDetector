@@ -1,6 +1,8 @@
 from data.Data import Data
 from data.loaders.DataLoader import DataLoader
 from tensorflow import keras
+from keras.preprocessing.image import image_utils
+
 
 class CifarDataLoader(DataLoader):
     def __init__(self):
@@ -16,6 +18,8 @@ class CifarDataLoader(DataLoader):
         data = Data(test_images, test_labels)
         return data
 
-    def load_single_data(self):
-        #TODO implement if prediction implemented
-        pass
+    def load_single_image(self, img_path, target_size):
+        img = image_utils.load_img(img_path, target_size)
+        img = image_utils.img_to_array(img)
+        data = Data(img, None)
+        return data

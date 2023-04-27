@@ -11,5 +11,5 @@ class DataLoader:
         pass
 
     @abstractmethod
-    def load_single_data(self):
+    def load_single_image(self, img_path, target_size):
         pass
