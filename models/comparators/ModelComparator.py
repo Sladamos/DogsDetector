@@ -1,6 +1,7 @@
 from data.Data import Data
 from models.NeuralModel import NeuralModel
 from models.TensorNeuralModel import TensorNeuralModel
+import numpy as np
 
 
 class ModelComparator:
@@ -18,6 +19,10 @@ class ModelComparator:
         else:
             return -1, accuracy_b
 
-    def predict_compare(self):
-        # TODO: implement predict
-        pass
+    def predict_compare(self, model_a, model_b):
+        result_a = model_a.predict(self.test_data)
+        result_b = model_b.predict(self.test_data)
+        if (result_a == result_b).all():
+            return 1
+        else:
+            return 0

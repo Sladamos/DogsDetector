@@ -9,7 +9,7 @@ class TensorNeuralModel(NeuralModel):
 
     def predict(self, data):
         images = data.get_images()
-        predicted_images = self.model.predict(images)
+        predicted_images = self.model.predict(images, verbose=0)
         formatted_images = np.argmax(predicted_images, axis=1)
         return formatted_images
 
