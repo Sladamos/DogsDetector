@@ -23,5 +23,7 @@ class NeuralModel:
     def evaluate(self, test_data, number_of_samples):
         pass
 
-    # TODO: implement predict
+    @abstractmethod
+    def predict(self, data):
+        pass
 

@@ -4,6 +4,12 @@ from tensorflow import keras
 
 
 class TensorNeuralModel(NeuralModel):
+
+    def predict(self, data):
+        images = data.get_images()
+        xd = self.model.predict(images)
+        return xd
+
     def evaluate(self, test_data, number_of_samples):
         test_set = test_data.get_images()
         test_labels = test_data.get_labels()
