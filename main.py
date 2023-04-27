@@ -25,7 +25,7 @@ batch_size = 64
 epochs = 1
 cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=0)
 #simple_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=0)
-
+values = cnn_model.predict(test_data)
 comparator = ModelComparator(test_data)
 print("comparator")
 #print(comparator.evaluate_compare(cnn_model, simple_model, batch_size))

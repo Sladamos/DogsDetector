@@ -1,3 +1,5 @@
+import numpy as np
+
 from data.Data import Data
 from models.NeuralModel import NeuralModel
 from tensorflow import keras
@@ -7,8 +9,9 @@ class TensorNeuralModel(NeuralModel):
 
     def predict(self, data):
         images = data.get_images()
-        xd = self.model.predict(images)
-        return xd
+        predicted_images = self.model.predict(images)
+        formatted_images = np.argmax(predicted_images, axis=1)
+        return formatted_images
 
     def evaluate(self, test_data, number_of_samples):
         test_set = test_data.get_images()
