@@ -1,5 +1,6 @@
 import os
 
+from data.loaders.CifarDataLoader import CifarDataLoader
 from models.comparators.ModelComparator import ModelComparator
 
 from models.creators.models.CifarModelsCreator import CifarModelsCreator
@@ -7,13 +8,10 @@ from models.creators.models.CifarModelsCreator import CifarModelsCreator
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 from tensorflow import keras
+data_loader = CifarDataLoader()
+train_images, train_labels = data_loader.load_train_images()
+test_images, test_labels = data_loader.load_test_images()
 
-import matplotlib.pyplot as plt
-
-
-cifar10 = keras.datasets.cifar10
-
-(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
 train_images, test_images = train_images / 255.0, test_images / 255.0
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 models_creator = CifarModelsCreator()
