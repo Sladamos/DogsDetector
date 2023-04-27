@@ -1,18 +1,22 @@
 import os
 
 from data.loaders.CifarDataLoader import CifarDataLoader
+from data.normalizators.DivideNormalizator import DivideNormalizator
 from models.comparators.ModelComparator import ModelComparator
 
 from models.creators.models.CifarModelsCreator import CifarModelsCreator
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-from tensorflow import keras
+normalizator = DivideNormalizator(255.0)
 data_loader = CifarDataLoader()
-train_images, train_labels = data_loader.load_train_images()
-test_images, test_labels = data_loader.load_test_images()
+train_data = data_loader.load_train_data()
+train_data = normalizator.normalize(train_data)
+train_images, train_labels = train_data.get_images(), train_data.get_labels()
+test_data = data_loader.load_test_data()
+test_data = normalizator.normalize(test_data)
+test_images, test_labels = test_data.get_images(), test_data.get_labels()
 
-train_images, test_images = train_images / 255.0, test_images / 255.0
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 models_creator = CifarModelsCreator()
 

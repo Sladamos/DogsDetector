@@ -3,13 +3,13 @@ from abc import abstractmethod
 
 class DataLoader:
     @abstractmethod
-    def load_train_images(self):
+    def load_train_data(self):
         pass
 
     @abstractmethod
-    def load_test_images(self):
+    def load_test_data(self):
         pass
 
     @abstractmethod
-    def load_image(self):
+    def load_single_data(self):
         pass

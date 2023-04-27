@@ -18,4 +18,5 @@ class ModelComparator:
             return -1, accuracy_b
 
     def predict_compare(self):
-        #TODO: implement predict
+        # TODO: implement predict
+        pass
