@@ -8,5 +8,8 @@ class DivideNormalizator(Normalizator):
 
     def normalize(self, data):
         images = data.get_images().copy()
+        labels = data.get_labels()
+        if labels is not None:
+            labels = labels.copy()
         normalized = images / self.divider
-        return Data(normalized, data.get_labels().copy())
+        return Data(normalized, labels)

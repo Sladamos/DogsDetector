@@ -26,3 +26,5 @@ class ModelComparator:
             return 1
         else:
             return 0
+
+    # TODO: imlement predict with known label

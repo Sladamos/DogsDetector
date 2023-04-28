@@ -4,6 +4,7 @@ from data.Data import Data
 from data.loaders.DataLoader import DataLoader
 from tensorflow import keras
 from keras.preprocessing.image import image_utils
+from PIL import Image
 
 
 class CifarDataLoader(DataLoader):
@@ -20,8 +21,8 @@ class CifarDataLoader(DataLoader):
         data = Data(test_images, test_labels)
         return data
 
-    def load_single_image(self, img_path, target_size=(224, 224)):
-        img = image_utils.load_img(img_path, target_size)
+    def load_single_image(self, img_path, target_size=(32, 32)):
+        img = image_utils.load_img(img_path, target_size=target_size, color_mode="rgb")
         img = image_utils.img_to_array(img)
         img = np.expand_dims(img, axis=0)
         data = Data(img, None)
