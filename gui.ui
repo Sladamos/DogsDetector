@@ -26,7 +26,7 @@
     <string>Select Image</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="detect_dog_button">
+  <widget class="QPushButton" name="identify_button">
    <property name="geometry">
     <rect>
      <x>410</x>
@@ -58,7 +58,7 @@
     <string>Selected image</string>
    </property>
   </widget>
-  <widget class="QLabel" name="out_label">
+  <widget class="QLabel" name="output_label">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -68,7 +68,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>sample text</string>
+    <string>Current action</string>
    </property>
    <property name="scaledContents">
     <bool>false</bool>
@@ -77,7 +77,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="dog_preview">
+  <widget class="QLabel" name="image_preview">
    <property name="geometry">
     <rect>
      <x>40</x>

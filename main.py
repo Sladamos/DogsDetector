@@ -44,8 +44,26 @@ def workbench():
     print(comparator.predict_compare(cnn_model, cnn_model))
     print(comparator.predict_compare(cnn_model, cnn_second_model))
 
+def init_app():
+    data_loader = CifarDataLoader()
+    normalizator = DivideNormalizator(255.0)
+    models_creator = CifarModelsCreator()
+    cnn_model = models_creator.create_convolution_neural_model()
+    train_data = data_loader.load_train_data()
+    train_data = normalizator.normalize(train_data)
+    batch_size = 64
+    epochs = 5
+    verbose = 1
+    cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=verbose)
+    return data_loader, cnn_model, normalizator
 
-qapp = QApplication(sys.argv)
-app = Application()
-sys.exit(qapp.exec_())
+
+data_loader, cnn_model, normalizator = init_app()
+#TODO: load model and class names from files
+#TODO : dogs model creator
+class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+app = QApplication(sys.argv)
+my_app = Application(data_loader, cnn_model, normalizator, class_names)
+sys.exit(app.exec_())
+
 
