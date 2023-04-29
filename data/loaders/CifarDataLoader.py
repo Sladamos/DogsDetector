@@ -4,7 +4,6 @@ from data.Data import Data
 from data.loaders.DataLoader import DataLoader
 from tensorflow import keras
 from keras.preprocessing.image import image_utils
-from PIL import Image
 
 
 class CifarDataLoader(DataLoader):
