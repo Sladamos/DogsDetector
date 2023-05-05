@@ -9,7 +9,6 @@ class Application(QMainWindow):
 
     def __init__(self, data_loader, model, normalizator, class_names, title="Dogs detector"):
         super(Application, self).__init__()
-        # TODO: pretty gui
         loadUi("gui.ui", self)
         self.data_loader = data_loader
         self.data = None
@@ -52,9 +51,9 @@ class Application(QMainWindow):
         self.data = None
 
     def initialize_default_values(self, title):
-        self.setStyleSheet("background-color: rgb(20, 20, 20);"
+        self.setStyleSheet("background-color: rgb(42, 0, 42);"
                            "color: rgb(255, 255, 255);"
-                           "font-family: \"Comic Sans MS\", \"Comic Sans\", cursive;")
+                           "font-family: \"Georgia, serif\";")
         self.output_label.setStyleSheet("font-size: 18px;")
         self.setWindowTitle(title)
         self.set_label("")
@@ -62,6 +61,6 @@ class Application(QMainWindow):
 
     def initialize_buttons(self):
         self.select_image_button.clicked.connect(self.select_image)
-        self.select_image_button.setStyleSheet("background-color: rgb(140, 0, 0);")
+        self.select_image_button.setStyleSheet("background-color: rgb(100, 0, 0);")
         self.identify_button.clicked.connect(self.identify_image)
-        self.identify_button.setStyleSheet("background-color: rgb(0, 140, 0);")
+        self.identify_button.setStyleSheet("background-color: rgb(0, 100, 0);")
