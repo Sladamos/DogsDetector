@@ -51,7 +51,10 @@ def init_app():
     normalizator = DivideNormalizator(255.0)
     loader = TensorModelLoader()
     cnn_model = loader.load_model("./cifarCnn.h5")
-    return data_loader, cnn_model, normalizator
+    text_file = open("cifarClasses.txt", "r")
+    class_names = text_file.read().split(',')
+    print(class_names)
+    return data_loader, cnn_model, normalizator, class_names
 
 def train_model():
     data_loader = CifarDataLoader()
@@ -62,17 +65,15 @@ def train_model():
     train_data = data_loader.load_train_data()
     train_data = normalizator.normalize(train_data)
     batch_size = 64
-    epochs = 10
+    epochs = 5
     verbose = 1
     cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=verbose)
     saver.save_model(cnn_model, os.path.normpath("./cifarCnn.h5"))
 
 #train_model()
-data_loader, cnn_model, normalizator = init_app()
-#TODO: load model and class names from files
-#TODO : dogs model creator
+data_loader, cnn_model, normalizator, class_names = init_app()
+#TODO : dogs model creator and dogs data loader
 
-class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 app = QApplication(sys.argv)
 my_app = Application(data_loader, cnn_model, normalizator, class_names)
 sys.exit(app.exec_())
