@@ -17,3 +17,11 @@ class LayersCreator:
     @abstractmethod
     def create_dense_layer(self, units, activation):
         pass
+
+    @abstractmethod
+    def create_batch_normalization_layer(self):
+        pass
+
+    @abstractmethod
+    def create_dropout_layer(self, rate):
+        pass

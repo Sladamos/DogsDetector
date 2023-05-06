@@ -25,8 +25,8 @@ def workbench():
     class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
     models_creator = CifarModelsCreator()
 
-    cnn_model = models_creator.create_convolution_neural_model()
-    cnn_second_model = models_creator.create_convolution_neural_model()
+    cnn_model = models_creator.create_advanced_neural_model()
+    cnn_second_model = models_creator.create_advanced_neural_model()
     simple_model = models_creator.create_simple_neural_model()
     path = os.path.normpath('C:/Users/Kerwus/Downloads/fat.jpg')
     simple = data_loader.load_single_image(path)
@@ -60,7 +60,7 @@ def train_model():
     data_loader = CifarDataLoader()
     normalizator = DivideNormalizator(255.0)
     models_creator = CifarModelsCreator()
-    cnn_model = models_creator.create_convolution_neural_model()
+    cnn_model = models_creator.create_advanced_neural_model()
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     train_data = normalizator.normalize(train_data)

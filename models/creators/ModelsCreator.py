@@ -7,5 +7,5 @@ class ModelsCreator:
         pass
 
     @abstractmethod
-    def create_convolution_neural_model(self):
+    def create_advanced_neural_model(self):
         pass

@@ -8,7 +8,7 @@ class CifarModelsCreator(ModelsCreator):
     def __init__(self):
         self.layers_creator = TensorLayersCreator()
 
-    def create_convolution_neural_model(self):
+    def create_advanced_neural_model(self):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=(32, 32, 3)))
