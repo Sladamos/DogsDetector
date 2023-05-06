@@ -7,7 +7,7 @@ from data.normalizators.DivideNormalizator import DivideNormalizator
 from gui.Application import Application
 from models.comparators.ModelComparator import ModelComparator
 
-from models.creators.models.CifarModelsCreator import CifarModelsCreator
+from models.creators.CifarModelsCreator import CifarModelsCreator
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 

@@ -51,7 +51,7 @@ class Application(QMainWindow):
         self.data = None
 
     def initialize_default_values(self, title):
-        self.setStyleSheet("background-color: rgb(42, 0, 42);"
+        self.setStyleSheet("background-color: rgb(105, 50, 110);"
                            "color: rgb(255, 255, 255);"
                            "font-family: \"Georgia, serif\";")
         self.output_label.setStyleSheet("font-size: 18px;")
@@ -61,6 +61,6 @@ class Application(QMainWindow):
 
     def initialize_buttons(self):
         self.select_image_button.clicked.connect(self.select_image)
-        self.select_image_button.setStyleSheet("background-color: rgb(100, 0, 0);")
+        self.select_image_button.setStyleSheet("background-color: rgb(150, 0, 0);")
         self.identify_button.clicked.connect(self.identify_image)
-        self.identify_button.setStyleSheet("background-color: rgb(0, 100, 0);")
+        self.identify_button.setStyleSheet("background-color: rgb(0, 120, 0);")
