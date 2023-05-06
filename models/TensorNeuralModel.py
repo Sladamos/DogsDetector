@@ -6,6 +6,8 @@ from tensorflow import keras
 
 
 class TensorNeuralModel(NeuralModel):
+    def __init__(self):
+        self.model = keras.models.Sequential()
 
     def predict(self, data):
         images = data.get_images()
@@ -18,8 +20,8 @@ class TensorNeuralModel(NeuralModel):
         test_labels = test_data.get_labels()
         return self.model.evaluate(test_set, test_labels, batch_size=number_of_samples, verbose=0)
 
-    def __init__(self):
-        self.model = keras.models.Sequential()
+    def set_model(self, model):
+        self.model = model
 
     def compile(self, optimizer, loss, metrics):
         self.model.compile(optimizer=optimizer, loss=loss, metrics=metrics)

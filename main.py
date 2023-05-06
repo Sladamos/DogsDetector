@@ -8,6 +8,8 @@ from gui.Application import Application
 from models.comparators.ModelComparator import ModelComparator
 
 from models.creators.CifarModelsCreator import CifarModelsCreator
+from models.loaders.TensorModelLoader import TensorModelLoader
+from models.savers.TensorModelSaver import TensorModelSaver
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -47,20 +49,29 @@ def workbench():
 def init_app():
     data_loader = CifarDataLoader()
     normalizator = DivideNormalizator(255.0)
+    loader = TensorModelLoader()
+    cnn_model = loader.load_model("./cifarCnn.h5")
+    return data_loader, cnn_model, normalizator
+
+def train_model():
+    data_loader = CifarDataLoader()
+    normalizator = DivideNormalizator(255.0)
     models_creator = CifarModelsCreator()
     cnn_model = models_creator.create_convolution_neural_model()
+    saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     train_data = normalizator.normalize(train_data)
     batch_size = 64
-    epochs = 5
+    epochs = 10
     verbose = 1
     cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=verbose)
-    return data_loader, cnn_model, normalizator
+    saver.save_model(cnn_model, os.path.normpath("./cifarCnn.h5"))
 
-
+#train_model()
 data_loader, cnn_model, normalizator = init_app()
 #TODO: load model and class names from files
 #TODO : dogs model creator
+
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 app = QApplication(sys.argv)
 my_app = Application(data_loader, cnn_model, normalizator, class_names)
