@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 from data.Data import Data
 from data.loaders.DataLoader import DataLoader
@@ -12,7 +13,18 @@ class CifarDataLoader(DataLoader):
 
     def load_train_data(self):
         (train_images, train_labels), (test_images, test_labels) = self.cifar10.load_data()
-        data = Data(train_images, train_labels)
+        size = len(train_images)
+        data = []
+        while size > 0:
+            img = train_images[size-1]
+            train_images = train_images[:-1]
+            large_img = cv2.resize(img, dsize=(227, 227), interpolation=cv2.INTER_CUBIC)
+            data.append(large_img)
+            size -= 1
+            if size == 40000:
+                break
+        data = np.array(data)
+        data = Data(data, train_labels)
         return data
 
     def load_test_data(self):

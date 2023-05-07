@@ -8,6 +8,7 @@ from gui.Application import Application
 from models.comparators.ModelComparator import ModelComparator
 
 from models.creators.CifarModelsCreator import CifarModelsCreator
+from models.creators.DogsModelsCreator import DogsModelsCreator
 from models.loaders.TensorModelLoader import TensorModelLoader
 from models.savers.TensorModelSaver import TensorModelSaver
 
@@ -57,22 +58,22 @@ def init_app(data_loader, normalizator):
     sys.exit(app.exec_())
 
 def train_model(data_loader, normalizator):
-    models_creator = CifarModelsCreator()
-    cnn_model = models_creator.create_advanced_neural_model()
+    models_creator = DogsModelsCreator()
+    cnn_model = models_creator.create_simple_neural_model(10)
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     train_data = normalizator.normalize(train_data)
     batch_size = 64
-    epochs = 5
+    epochs = 1
     verbose = 1
     cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=verbose)
-    saver.save_model(cnn_model, os.path.normpath("./cifarCnn.h5"))
+    saver.save_model(cnn_model, os.path.normpath("./dogsCifarCnn.h5"))
 
 data_loader = CifarDataLoader()
 normalizator = DivideNormalizator(255.0)
-#train_model(data_loader, normalizator)
+train_model(data_loader, normalizator)
 init_app(data_loader, normalizator)
-#TODO : dogs model creator and dogs data loader
+#TODO : dogs data loader
 
 
 

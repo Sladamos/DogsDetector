@@ -11,5 +11,5 @@ class DivideNormalizator(Normalizator):
         labels = data.get_labels()
         if labels is not None:
             labels = labels.copy()
-        normalized = images / self.divider
-        return Data(normalized, labels)
+        images = images / self.divider
+        return Data(images, labels)
