@@ -8,7 +8,7 @@ class CifarModelsCreator(ModelsCreator):
     def __init__(self):
         self.layers_creator = TensorLayersCreator()
 
-    def create_advanced_neural_model(self):
+    def create_advanced_neural_model(self, number_of_classes):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=(32, 32, 3)))
@@ -17,7 +17,7 @@ class CifarModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(64))
-        model.add_layer(layers_creator.create_dense_layer(10))
+        model.add_layer(layers_creator.create_dense_layer(number_of_classes))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
         optim = keras.optimizers.Adam(learning_rate=0.001)
@@ -30,7 +30,7 @@ class CifarModelsCreator(ModelsCreator):
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_flatten_layer(input_shape=(32, 32, 3)))
         model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
-        model.add_layer(layers_creator.create_dense_layer(10))
+        model.add_layer(layers_creator.create_dense_layer(number_of_classes))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
         optim = keras.optimizers.Adam(learning_rate=0.001)

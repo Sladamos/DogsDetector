@@ -46,19 +46,17 @@ def workbench():
     print(comparator.predict_compare(cnn_model, cnn_model))
     print(comparator.predict_compare(cnn_model, cnn_second_model))
 
-def init_app():
-    data_loader = CifarDataLoader()
-    normalizator = DivideNormalizator(255.0)
+def init_app(data_loader, normalizator):
     loader = TensorModelLoader()
     cnn_model = loader.load_model("./cifarCnn.h5")
     text_file = open("cifarClasses.txt", "r")
     class_names = text_file.read().split(',')
     print(class_names)
-    return data_loader, cnn_model, normalizator, class_names
+    app = QApplication(sys.argv)
+    my_app = Application(data_loader, cnn_model, normalizator, class_names)
+    sys.exit(app.exec_())
 
-def train_model():
-    data_loader = CifarDataLoader()
-    normalizator = DivideNormalizator(255.0)
+def train_model(data_loader, normalizator):
     models_creator = CifarModelsCreator()
     cnn_model = models_creator.create_advanced_neural_model()
     saver = TensorModelSaver()
@@ -70,12 +68,12 @@ def train_model():
     cnn_model.train(train_data, epochs=epochs, number_of_samples=batch_size, verbose=verbose)
     saver.save_model(cnn_model, os.path.normpath("./cifarCnn.h5"))
 
-#train_model()
-data_loader, cnn_model, normalizator, class_names = init_app()
+data_loader = CifarDataLoader()
+normalizator = DivideNormalizator(255.0)
+#train_model(data_loader, normalizator)
+init_app(data_loader, normalizator)
 #TODO : dogs model creator and dogs data loader
 
-app = QApplication(sys.argv)
-my_app = Application(data_loader, cnn_model, normalizator, class_names)
-sys.exit(app.exec_())
+
 
 

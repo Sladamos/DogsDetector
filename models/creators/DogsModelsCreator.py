@@ -7,9 +7,8 @@ from tensorflow import keras
 class DogsModelsCreator(ModelsCreator):
     def __init__(self):
         self.layers_creator = TensorLayersCreator()
-        self.number_of_breeds = 120
 
-    def create_advanced_neural_model(self):
+    def create_advanced_neural_model(self, number_of_classes):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=(224, 224, 3), padding='same'))
@@ -44,7 +43,7 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dense_layer(512, activation='relu'))
         model.add_layer(layers_creator.create_batch_normalization_layer())
         model.add_layer(layers_creator.create_dropout_layer(0.5))
-        model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+        model.add_layer(layers_creator.create_dense_layer(number_of_classes, activation='softmax'))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
         optim = keras.optimizers.Adam(learning_rate=0.001)
@@ -52,7 +51,7 @@ class DogsModelsCreator(ModelsCreator):
         model.compile(optim, loss, metrics)
         return model
 
-    def create_simple_neural_model(self):
+    def create_simple_neural_model(self, number_of_classes):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=(224, 224, 3)))
@@ -72,7 +71,7 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.5))
         model.add_layer(layers_creator.create_dense_layer(256, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.5))
-        model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+        model.add_layer(layers_creator.create_dense_layer(number_of_classes, activation='softmax'))
 
         loss = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
         optim = keras.optimizers.Adam(learning_rate=0.001)
