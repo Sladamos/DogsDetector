@@ -36,7 +36,7 @@ class DogsModelsCreator(ModelsCreator):
         return model
 
     def create_simple_neural_model(self, input_shape=(224, 224, 3)):
-        model = self.model_6(input_shape)
+        model = self.model_3(input_shape)
         loss = keras.losses.CategoricalCrossentropy()
         optim = keras.optimizers.Adam(learning_rate=0.001)
         metrics = ["accuracy"]

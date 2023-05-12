@@ -10,6 +10,8 @@ from data.normalizators.DivideNormalizator import DivideNormalizator
 from gui.Application import Application
 from models.comparators.ModelComparator import ModelComparator
 
+
+import tensorflow as tf
 import matplotlib.pyplot as plt
 from models.creators.CifarModelsCreator import CifarModelsCreator
 from models.creators.DogsModelsCreator import DogsModelsCreator
@@ -17,7 +19,6 @@ from models.loaders.TensorModelLoader import TensorModelLoader
 from models.savers.TensorModelSaver import TensorModelSaver
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
 
 def make_plots(results):
     plt.plot(results.history['accuracy'])
@@ -82,11 +83,13 @@ def init_app():
 
 def train_model():
     batch_size = 64
+    dirs = os.listdir("./images/dogs/Images")
+    models_creator = DogsModelsCreator(len(dirs))
     data_loader = DogsDataLoader(batch_size)
-    models_creator = DogsModelsCreator(16)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
-    loader = TensorModelLoader()
+    #loader = TensorModelLoader()
     #cnn_model = loader.load_model("./newHope/simple-after6.h5")
+
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
@@ -99,6 +102,7 @@ def train_model():
 
 
 # workbench()
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 train_model()
 # data_loader, cnn_model, normalizator, class_names = init_app()
 # app = QApplication(sys.argv)
