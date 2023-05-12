@@ -16,7 +16,11 @@ class NeuralModel:
         pass
 
     @abstractmethod
-    def train(self, train_data, epochs, number_of_samples, callbacks):
+    def train(self, train_data, epochs, batch_size, callbacks, verbose):
+        pass
+
+    @abstractmethod
+    def train_with_validation(self, train_data, validation_data, epochs, batch_size, callbacks, verbose):
         pass
 
     @abstractmethod

@@ -3,6 +3,9 @@ from keras import layers
 
 
 class TensorLayersCreator(LayersCreator):
+    def create_gaussian_noise(self, standard_deviation):
+        return layers.GaussianNoise(standard_deviation)
+
     def create_dropout_layer(self, rate):
         return layers.Dropout(rate)
 

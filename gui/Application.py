@@ -21,7 +21,7 @@ class Application(QMainWindow):
         self.show()
 
     def select_image(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Select image", filter="Images (*.jpg *.png *.bmp)")
+        path, _ = QFileDialog.getOpenFileName(self, "Select image", ".", filter="Images (*.jpg *.png *.bmp)")
 
         if path == "":
             return
@@ -30,7 +30,7 @@ class Application(QMainWindow):
 
     def on_path_updated(self, path):
         self.file_path.setText(path)
-        self.data = self.data_loader.load_single_image(path)
+        self.data = self.data_loader.load_single_image(path, target_size=(224, 224))
         self.data = self.normalizator.normalize(self.data)
         self.set_label(os.path.basename(os.path.normpath(path)))
         self.set_image(path)

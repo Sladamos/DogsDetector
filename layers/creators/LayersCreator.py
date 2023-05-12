@@ -25,3 +25,7 @@ class LayersCreator:
     @abstractmethod
     def create_dropout_layer(self, rate):
         pass
+
+    @abstractmethod
+    def create_gaussian_noise(self, standard_deviation):
+        pass
