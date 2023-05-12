@@ -20,15 +20,15 @@ from models.savers.TensorModelSaver import TensorModelSaver
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-def make_plots(results):
+def make_plots(results, name):
     plt.plot(results.history['accuracy'])
     plt.plot(results.history['val_accuracy'])
     plt.title('Accuracy')
     plt.xlabel('epoch')
     plt.ylabel('accuracy')
     plt.legend(['training', 'validation'], loc='upper left')
+    plt.savefig('./newHope/accuracy/' + name)
     plt.show()
-    plt.savefig('./newHope/accuracy_simple.png')
 
     plt.plot(results.history['loss'])
     plt.plot(results.history['val_loss'])
@@ -36,8 +36,8 @@ def make_plots(results):
     plt.xlabel('epoch')
     plt.ylabel('loss')
     plt.legend(['training', 'validation'], loc='upper left')
+    plt.savefig('./newHope/loss/' + name)
     plt.show()
-    plt.savefig('./newHope/loss_simple.png')
 
 
 def workbench():
@@ -63,7 +63,7 @@ def workbench():
     cnn_model = models_creator.create_simple_neural_model(input_shape)
     results = cnn_model.model.fit(x=training_set, validation_data=validation_set, epochs=epochs, batch_size=batch_size,
                                   verbose=verbose)
-    make_plots(results)
+    make_plots(results, "loss_simple.png")
     saver = TensorModelSaver()
     saver.save_model(cnn_model, os.path.normpath("./newHope/simple.h5"))
 
@@ -87,22 +87,20 @@ def train_model():
     models_creator = DogsModelsCreator(len(dirs))
     data_loader = DogsDataLoader(batch_size)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
-    #loader = TensorModelLoader()
-    #cnn_model = loader.load_model("./newHope/simple-after6.h5")
+    loader = TensorModelLoader()
 
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
-    epochs = 10
+    epochs = 15
     verbose = 1
     results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
 
-    make_plots(results)
-    saver.save_model(cnn_model, os.path.normpath("./newHope/simple-after6.h5"))
+    make_plots(results, "model_8.png")
+    #saver.save_model(cnn_model, os.path.normpath("./newHope/model.h5"))
 
 
 # workbench()
-print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 train_model()
 # data_loader, cnn_model, normalizator, class_names = init_app()
 # app = QApplication(sys.argv)

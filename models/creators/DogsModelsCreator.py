@@ -36,7 +36,7 @@ class DogsModelsCreator(ModelsCreator):
         return model
 
     def create_simple_neural_model(self, input_shape=(224, 224, 3)):
-        model = self.model_3(input_shape)
+        model = self.model_5(input_shape)
         loss = keras.losses.CategoricalCrossentropy()
         optim = keras.optimizers.Adam(learning_rate=0.001)
         metrics = ["accuracy"]
@@ -50,41 +50,78 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
+    # def model_abandoned_1(self, input_shape):
+        # model = TensorNeuralModel()
+        # layers_creator = self.layers_creator
+        # model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        # model.add_layer(layers_creator.create_dense_layer(2*self.number_of_breeds, activation='relu'))
+        # model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+        # return model
+
     def model_2(self, input_shape):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
+        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_dense_layer(16, activation='relu'))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
     def model_3(self, input_shape):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
+        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
         model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(16, activation='relu'))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
+
+    # def model_abandoned_2(self, input_shape):
+    #     model = TensorNeuralModel()
+    #     layers_creator = self.layers_creator
+    #     model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+    #     model.add_layer(layers_creator.create_gaussian_noise(0.01))
+    #     model.add_layer(layers_creator.create_pool_layer((2, 2)))
+    #     model.add_layer(layers_creator.create_dropout_layer(0.15))
+    #
+    #     model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+    #     model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+    #     return model
 
     def model_4(self, input_shape):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
+        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
         model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_dense_layer(32, activation='relu'))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(16, activation='relu'))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
     def model_5(self, input_shape):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
+        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_gaussian_noise(0.01))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
         model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(32, activation='relu'))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(16, activation='relu'))
+        model.add_layer(layers_creator.create_dropout_layer(0.25))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
@@ -92,26 +129,20 @@ class DogsModelsCreator(ModelsCreator):
         model = TensorNeuralModel()
         layers_creator = self.layers_creator
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_gaussian_noise(0.01))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_gaussian_noise(0.1))
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_dense_layer(64, activation='relu'))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(32, activation='relu'))
-        model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
-        return model
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
 
-    def model_7(self, input_shape):
-        model = TensorNeuralModel()
-        layers_creator = self.layers_creator
-        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_batch_normalization_layer())
-        model.add_layer(layers_creator.create_dropout_layer(0.2))
-        model.add_layer(layers_creator.create_gaussian_noise(0.1))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_pool_layer((2, 2)))
+        model.add_layer(layers_creator.create_dropout_layer(0.15))
+
         model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        model.add_layer(layers_creator.create_dense_layer(64, activation='relu'))
-        model.add_layer(layers_creator.create_gaussian_noise(0.2))
-        model.add_layer(layers_creator.create_dense_layer(32, activation='relu'))
+        model.add_layer(layers_creator.create_dense_layer(3*self.number_of_breeds, activation='relu'))
+        model.add_layer(layers_creator.create_dropout_layer(0.25))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
