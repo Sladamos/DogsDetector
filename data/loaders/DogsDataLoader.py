@@ -18,7 +18,7 @@ class DogsDataLoader(DataLoader):
     def __init__(self, batch_size):
         self.datagen = ImageDataGenerator(
             rescale=1. / 255,
-            shear_range=0.05,
+            shear_range=0.1,
             rotation_range=5,
             zoom_range=0.25,
             horizontal_flip=True,
