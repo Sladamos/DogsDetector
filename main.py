@@ -88,19 +88,19 @@ def train_model():
     data_loader = DogsDataLoader(batch_size)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
     loader = TensorModelLoader()
-    #cnn_model = loader.load_model("./newHope/saved/model_9")
+    #cnn_model = loader.load_model("./newHope/saved/model_9_ex")
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
-    epochs = 60
+    epochs = 100
     verbose = 1
-    checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/model_9", monitor='val_accuracy', save_best_only=True)
-    earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10)
+    checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/model_11", monitor='val_accuracy', save_best_only=True)
+    #earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10)
 
-    results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose, callbacks=[checkpoint, earlystop])
+    results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose, callbacks=[checkpoint])
     #results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
-    saver.save_model(cnn_model, "./newHope/saved/model_9_ex")
-    make_plots(results, "model_9_ex.png")
+    saver.save_model(cnn_model, "./newHope/saved/model_11")
+    make_plots(results, "model_11.png")
 
 
 # workbench()
