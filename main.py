@@ -72,7 +72,7 @@ def init_app():
     data_loader = CifarDataLoader()
     normalizator = DivideNormalizator(255.0)
     loader = TensorModelLoader()
-    cnn_model = loader.load_model("./advancedSecndCnn.h5")
+    cnn_model = loader.load_model("./newHope/saved/model_11")
     dirs = os.listdir("./images/dogs/Images")
     class_names = [dir.split('-', 1)[1] for dir in dirs]
 
@@ -88,24 +88,24 @@ def train_model():
     data_loader = DogsDataLoader(batch_size)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
     loader = TensorModelLoader()
-    #cnn_model = loader.load_model("./newHope/saved/model_9_ex")
+    cnn_model = loader.load_model("./newHope/saved/model_11")
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
-    epochs = 100
-    verbose = 1
+    epochs = 15
+    verbose = 2
     checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/model_11", monitor='val_accuracy', save_best_only=True)
-    #earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10)
+    earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10)
 
-    results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose, callbacks=[checkpoint])
+    results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose, callbacks=[earlystop, checkpoint])
     #results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
     saver.save_model(cnn_model, "./newHope/saved/model_11")
     make_plots(results, "model_11.png")
 
 
 # workbench()
-train_model()
-# data_loader, cnn_model, normalizator, class_names = init_app()
-# app = QApplication(sys.argv)
-# my_app = Application(data_loader, cnn_model, normalizator, class_names)
-# sys.exit(app.exec_())
+# train_model()
+data_loader, cnn_model, normalizator, class_names = init_app()
+app = QApplication(sys.argv)
+my_app = Application(data_loader, cnn_model, normalizator, class_names)
+sys.exit(app.exec_())
