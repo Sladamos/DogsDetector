@@ -71,14 +71,10 @@ def workbench():
 def init_app():
     data_loader = CifarDataLoader()
     normalizator = DivideNormalizator(255.0)
-    loader = TensorModelLoader()
-    cnn_model = loader.load_model("./newHope/saved/model_11")
+    model_loader = TensorModelLoader()
     dirs = os.listdir("./images/dogs/Images")
     class_names = [dir.split('-', 1)[1] for dir in dirs]
-
-    #class_names = text_file.read().split(',')
-    print(class_names)
-    return data_loader, cnn_model, normalizator, class_names
+    return data_loader, model_loader, normalizator, class_names
 
 
 def train_model():
@@ -105,7 +101,7 @@ def train_model():
 
 # workbench()
 # train_model()
-data_loader, cnn_model, normalizator, class_names = init_app()
+data_loader, model_loader, normalizator, class_names = init_app()
 app = QApplication(sys.argv)
-my_app = Application(data_loader, cnn_model, normalizator, class_names)
+my_app = Application(data_loader, model_loader, normalizator, class_names)
 sys.exit(app.exec_())

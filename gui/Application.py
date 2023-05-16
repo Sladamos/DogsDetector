@@ -7,17 +7,17 @@ from PyQt5 import QtGui
 
 class Application(QMainWindow):
 
-    def __init__(self, data_loader, model, normalizator, class_names, title="Dogs detector"):
+    def __init__(self, data_loader, model_loader, normalizator, class_names, title="Dogs detector"):
         super(Application, self).__init__()
         loadUi("gui.ui", self)
         self.data_loader = data_loader
         self.data = None
-        self.model = model
-        self.normalizator = normalizator
+        self.model_loader = model_loader
         self.class_names = class_names
-
+        self.normalizator = normalizator
         self.initialize_default_values(title)
         self.initialize_buttons()
+        self.initialize_radios()
         self.show()
 
     def select_image(self):
@@ -64,3 +64,17 @@ class Application(QMainWindow):
         self.select_image_button.setStyleSheet("background-color: rgb(150, 0, 0);")
         self.identify_button.clicked.connect(self.identify_image)
         self.identify_button.setStyleSheet("background-color: rgb(0, 120, 0);")
+
+    def initialize_radios(self):
+        self.our_model_button.setChecked(True)
+        self.modelGroup.setExclusive(True)
+        self.our_model_button.clicked.connect(self.call_our_model)
+        self.transfered_model_button.clicked.connect(self.call_transfered_model)
+        #self.call_our_model()
+
+
+    def call_our_model(self):
+        self.model = self.model_loader.load_model("./newHope/saved/model_11")
+
+    def call_transfered_model(self):
+        self.model = self.model_loader.load_model("./newHope/saved/transfered")

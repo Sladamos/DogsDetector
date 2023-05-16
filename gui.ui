@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="select_image_button">
    <property name="geometry">
     <rect>
-     <x>112</x>
+     <x>140</x>
      <y>730</y>
      <width>100</width>
      <height>30</height>
@@ -26,10 +26,42 @@
     <string>Select</string>
    </property>
   </widget>
+  <widget class="QRadioButton" name="our_model_button">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>700</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Simple model</string>
+   </property>
+   <attribute name="buttonGroup">
+     <string notr="true">modelGroup</string>
+    </attribute>
+  </widget>
+  <widget class="QRadioButton" name="transfered_model_button">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>730</y>
+     <width>130</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Advanced model</string>
+   </property>
+   <attribute name="buttonGroup">
+     <string notr="true">modelGroup</string>
+    </attribute>
+  </widget>
   <widget class="QPushButton" name="identify_button">
    <property name="geometry">
     <rect>
-     <x>237</x>
+     <x>265</x>
      <y>730</y>
      <width>100</width>
      <height>30</height>
@@ -42,7 +74,7 @@
   <widget class="QTextEdit" name="file_path">
    <property name="geometry">
     <rect>
-     <x>112</x>
+     <x>140</x>
      <y>650</y>
      <width>800</width>
      <height>30</height>
@@ -61,7 +93,7 @@
   <widget class="QLabel" name="output_label">
    <property name="geometry">
     <rect>
-     <x>112</x>
+     <x>140</x>
      <y>680</y>
      <width>800</width>
      <height>40</height>
@@ -80,7 +112,7 @@
   <widget class="QLabel" name="image_preview">
    <property name="geometry">
     <rect>
-     <x>112</x>
+     <x>140</x>
      <y>40</y>
      <width>800</width>
      <height>600</height>
