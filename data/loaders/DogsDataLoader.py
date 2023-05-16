@@ -23,8 +23,8 @@ class DogsDataLoader(DataLoader):
             zoom_range=0.25,
             horizontal_flip=True,
             validation_split=0.2,
-            width_shift_range=0.1,
-            height_shift_range=0.1)
+            width_shift_range=0.2,
+            height_shift_range=0.2)
         self.dataset_path = os.path.normpath("./images/dogs/Images")
         self.batch_size = batch_size
         self.target_size = (224, 224)
