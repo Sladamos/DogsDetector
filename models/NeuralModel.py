@@ -2,6 +2,9 @@ from abc import abstractmethod
 
 
 class NeuralModel:
+    @abstractmethod
+    def disableLayer(self, layer_number):
+        pass
 
     @abstractmethod
     def add_layer(self, layer):

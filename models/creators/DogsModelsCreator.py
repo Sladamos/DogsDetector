@@ -2,6 +2,7 @@ from layers.creators.TensorLayersCreator import TensorLayersCreator
 from models.TensorNeuralModel import TensorNeuralModel
 from models.creators.ModelsCreator import ModelsCreator
 from tensorflow import keras
+from keras.applications.inception_v3 import InceptionV3
 
 
 class DogsModelsCreator(ModelsCreator):
@@ -9,30 +10,17 @@ class DogsModelsCreator(ModelsCreator):
         self.layers_creator = TensorLayersCreator()
         self.number_of_breeds = number_of_classes
 
-    def create_advanced_neural_model(self, input_shape):
-        model = TensorNeuralModel()
-        layers_creator = self.layers_creator
-        model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
-        model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_batch_normalization_layer())
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
-        model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_batch_normalization_layer())
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
-        model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_batch_normalization_layer())
-        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu'))
-        model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_batch_normalization_layer())
-        model.add_layer(layers_creator.create_flatten_layer())
-        model.add_layer(layers_creator.create_dense_layer(512, activation='relu'))
-        model.add_layer(layers_creator.create_dropout_layer(0.5))
-        model.add_layer(layers_creator.create_dense_layer(256, activation='relu'))
-        model.add_layer(layers_creator.create_dropout_layer(0.5))
-        model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+    def create_advanced_neural_model(self, input_shape=(299, 299, 3)):
+        base_model = InceptionV3(weights='imagenet', include_top=False, input_shape=input_shape)
+        model = TensorNeuralModel(base_model)
+        model.add_layer(self.layers_creator.create_global_average_pooling())
+        model.add_layer(self.layers_creator.create_dropout_layer(0.3))
+        model.add_layer(self.layers_creator.create_dense_layer(512, activation="relu"))
+        model.add_layer(self.layers_creator.create_dense_layer(512, activation="relu"))
+        model.add_layer(self.layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+        model.disableLayer(0)
 
-        model.compile('adam', 'categorical_crossentropy', ['accuracy'])
-
+        model.compile(keras.optimizers.Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
         return model
 
     def create_simple_neural_model(self, input_shape=(224, 224, 3)):

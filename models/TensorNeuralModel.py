@@ -6,6 +6,9 @@ from tensorflow import keras
 
 
 class TensorNeuralModel(NeuralModel):
+    def disableLayer(self, layer_number):
+        self.model.layers[layer_number].trainable = False
+
     def train_with_validation(self, train_data, validation_data, epochs, batch_size, callbacks=None, verbose=2):
         training_set = train_data.get_images()
         validation_set = validation_data.get_images()
@@ -15,8 +18,10 @@ class TensorNeuralModel(NeuralModel):
             return self.model.fit(training_set, validation_data=validation_set, batch_size=batch_size, epochs=epochs, verbose=verbose,
                            callbacks=callbacks)
 
-    def __init__(self):
+    def __init__(self, base_model=None):
         self.model = keras.models.Sequential()
+        if base_model is not None:
+            self.model.add(base_model)
 
     def predict(self, data):
         images = data.get_images()

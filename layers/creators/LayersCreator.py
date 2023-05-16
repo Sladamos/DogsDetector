@@ -3,6 +3,10 @@ from abc import abstractmethod
 
 class LayersCreator:
     @abstractmethod
+    def create_global_average_pooling(self):
+        pass
+
+    @abstractmethod
     def create_convolution_layer(self, filters, kernel_size, activation, strides, padding, input_shape):
         pass
 

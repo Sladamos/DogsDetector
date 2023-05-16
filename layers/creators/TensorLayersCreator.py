@@ -3,6 +3,9 @@ from keras import layers
 
 
 class TensorLayersCreator(LayersCreator):
+    def create_global_average_pooling(self):
+        return layers.GlobalAveragePooling2D()
+
     def create_gaussian_noise(self, standard_deviation):
         return layers.GaussianNoise(standard_deviation)
 
