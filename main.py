@@ -87,17 +87,15 @@ def train_model():
     models_creator = DogsModelsCreator(len(dirs))
     data_loader = DogsDataLoader(batch_size)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
-    loader = TensorModelLoader()
-
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
-    epochs = 15
+    epochs = 10
     verbose = 1
     results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
 
-    make_plots(results, "model_8.png")
-    #saver.save_model(cnn_model, os.path.normpath("./newHope/model.h5"))
+    make_plots(results, "model_6.png")
+    saver.save_model(cnn_model, os.path.normpath("./newHope/model_6.h5"))
 
 
 # workbench()
