@@ -1,4 +1,4 @@
-# DogsDetector
+# Dogs Detector
 
 ## Description
 
