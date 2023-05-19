@@ -21,8 +21,8 @@ class DogsDataLoader(DataLoader):
         data = Data(validation_set, None)
         return data
 
-    def __init__(self, batch_size):
-        self.dataset_path = os.path.normpath("./images/dogs/Images")
+    def __init__(self, batch_size, path):
+        self.dataset_path = path
         self.batch_size = batch_size
         self.target_size = (224, 224)
 

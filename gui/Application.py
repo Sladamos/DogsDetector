@@ -3,6 +3,7 @@ import os
 from PyQt5.QtWidgets import QDialog, QFileDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui
+from keras.utils import plot_model
 
 
 class Application(QMainWindow):
@@ -67,16 +68,16 @@ class Application(QMainWindow):
         self.identify_button.setStyleSheet("background-color: rgb(0, 120, 0);")
 
     def initialize_radios(self):
-        self.transfered_model_button.setChecked(True)
+        self.our_model_button.setChecked(True)
         self.modelGroup.setExclusive(True)
         self.our_model_button.clicked.connect(self.call_our_model)
         self.transfered_model_button.clicked.connect(self.call_transfered_model)
-        self.call_transfered_model()
+        self.call_our_model()
 
     def call_our_model(self):
-        self.model = self.model_loader.load_model("./newHope/saved/model_11")
+        self.model = self.model_loader.load_model("./newHope/simple")
         self.target_size = (224, 224)
 
     def call_transfered_model(self):
         self.model = self.model_loader.load_model("./newHope/saved/transfered")
-        self.target_size = (299, 299)
+        self.target_size = (224, 224)

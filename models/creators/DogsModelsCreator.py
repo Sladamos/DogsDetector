@@ -10,7 +10,13 @@ class DogsModelsCreator(ModelsCreator):
         self.layers_creator = TensorLayersCreator()
         self.number_of_breeds = number_of_classes
 
-    def create_advanced_neural_model(self, input_shape=(299, 299, 3)):
+    def create_advanced_neural_model(self, input_shape=(224, 224, 3)):
+        model = self.adv_model_2(input_shape=input_shape)
+
+        model.compile(keras.optimizers.Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+        return model
+
+    def adv_model_1(self, input_shape):
         base_model = InceptionV3(weights='imagenet', include_top=False, input_shape=input_shape)
         model = TensorNeuralModel(base_model)
         model.add_layer(self.layers_creator.create_global_average_pooling())
@@ -19,8 +25,15 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(self.layers_creator.create_dense_layer(512, activation="relu"))
         model.add_layer(self.layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         model.disableLayer(0)
+        return model
 
-        model.compile(keras.optimizers.Adam(learning_rate=0.0001), loss='categorical_crossentropy', metrics=['accuracy'])
+    def adv_model_2(self, input_shape):
+        base_model = InceptionV3(weights='imagenet', include_top=False, input_shape=input_shape)
+        model = TensorNeuralModel(base_model)
+        model.add_layer(self.layers_creator.create_global_average_pooling())
+        model.add_layer(self.layers_creator.create_dropout_layer(0.2))
+        model.add_layer(self.layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
+        model.disableLayer(0)
         return model
 
     def create_simple_neural_model(self, input_shape=(224, 224, 3)):
