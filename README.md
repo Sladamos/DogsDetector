@@ -80,6 +80,8 @@ def model_11(self, input_shape):
 
 As the result of a little number of images per breed, it was also reasonable to use transfered learning technique and advanced model is based on it. It is extension of **InceptionV3** model.
 
+It was created to detect one of all dataset breeds.
+
 ![advancedAccuracy](images/transfered.png "Advanced model accuracy")
 
 ```
