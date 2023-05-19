@@ -12,6 +12,7 @@ class Application(QMainWindow):
         loadUi("gui.ui", self)
         self.data_loader = data_loader
         self.data = None
+        self.target_size = None
         self.model_loader = model_loader
         self.class_names = class_names
         self.normalizator = normalizator
@@ -30,7 +31,7 @@ class Application(QMainWindow):
 
     def on_path_updated(self, path):
         self.file_path.setText(path)
-        self.data = self.data_loader.load_single_image(path, target_size=(224, 224))
+        self.data = self.data_loader.load_single_image(path, target_size=self.target_size)
         self.data = self.normalizator.normalize(self.data)
         self.set_label(os.path.basename(os.path.normpath(path)))
         self.set_image(path)
@@ -66,15 +67,16 @@ class Application(QMainWindow):
         self.identify_button.setStyleSheet("background-color: rgb(0, 120, 0);")
 
     def initialize_radios(self):
-        self.our_model_button.setChecked(True)
+        self.transfered_model_button.setChecked(True)
         self.modelGroup.setExclusive(True)
         self.our_model_button.clicked.connect(self.call_our_model)
         self.transfered_model_button.clicked.connect(self.call_transfered_model)
-        #self.call_our_model()
-
+        self.call_transfered_model()
 
     def call_our_model(self):
-        self.model = self.model_loader.load_model("./newHope/saved/our")
+        self.model = self.model_loader.load_model("./newHope/saved/model_11")
+        self.target_size = (224, 224)
 
     def call_transfered_model(self):
         self.model = self.model_loader.load_model("./newHope/saved/transfered")
+        self.target_size = (299, 299)
