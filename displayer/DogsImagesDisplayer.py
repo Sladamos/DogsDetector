@@ -51,7 +51,6 @@ class DogsImagesDisplayer(ImagesDisplayer):
         images_per_row = min(len(instances), images_per_row)
         n_rows = (len(instances) - 1) // images_per_row + 1
         row_images = []
-        n_empty = n_rows * images_per_row - len(instances)
         for row in range(n_rows):
             if row == len(instances) / images_per_row:
                 break

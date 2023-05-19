@@ -65,9 +65,7 @@ def init_app():
     data_loader = CifarDataLoader()
     normalizator = DivideNormalizator(255.0)
     model_loader = TensorModelLoader()
-    dirs = os.listdir("./images/dogs/Images")
-    class_names = [dir.split('-', 1)[1] for dir in dirs]
-    return data_loader, model_loader, normalizator, class_names
+    return data_loader, model_loader, normalizator
 
 
 def train_model():
@@ -101,9 +99,9 @@ def print_images():
 
 
 # print_images()
-workbench()
+# workbench()
 # train_model()
-# data_loader, model_loader, normalizator, class_names = init_app()
-# app = QApplication(sys.argv)
-# my_app = Application(data_loader, model_loader, normalizator, class_names)
-# sys.exit(app.exec_())
+data_loader, model_loader, normalizator = init_app()
+app = QApplication(sys.argv)
+my_app = Application(data_loader, model_loader, normalizator)
+sys.exit(app.exec_())
