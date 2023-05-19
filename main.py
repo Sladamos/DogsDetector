@@ -94,8 +94,9 @@ def train_model():
 
 def print_images():
     displayer = DogsImagesDisplayer()
-    displayer.display_images()
-    displayer.display_transformed_image()
+    displayer.display_image_with_gaussian_noise(os.path.normpath("./images/dingo.jpg"), 0.3)
+    # displayer.display_images()
+    # displayer.display_transformed_image()
 
 
 # print_images()

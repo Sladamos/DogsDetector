@@ -1,5 +1,6 @@
 import os
 
+import cv2
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import load_img, img_to_array, image_utils
@@ -46,6 +47,16 @@ class DogsImagesDisplayer(ImagesDisplayer):
 
         plt.savefig(os.path.normpath('./newHope/augmentedDog.png'), transparent=False, bbox_inches='tight', dpi=900)
         plt.show()
+
+    def display_image_with_gaussian_noise(self, path, std_dev):
+        image = cv2.resize(cv2.imread(path, cv2.IMREAD_COLOR), (592, 333))
+        noise = np.random.normal(loc=0, scale=std_dev, size=image.shape).astype(np.uint8)
+        noisy_image = cv2.add(image, noise)
+        images = np.concatenate((image, noisy_image), axis=0)
+        cv2.imshow('Images', images)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
 
     def plot_images(self, instances, images_per_row=12):
         images_per_row = min(len(instances), images_per_row)
