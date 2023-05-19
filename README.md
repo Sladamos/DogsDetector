@@ -30,7 +30,9 @@ To apply it I've implemented below Image generator.
 ![augmentedDog](images/augmentedDog.png "Preprocess")
 
 # Simple model
-I've created my model by trial and error method. You can check all of my previous models in [Dogs models creator](https://github.com/Sladamos/DogsDetector/blob/main/models/creators/DogsModelsCreator.py). It was created to detect one of 5 breeds:
+I've created my model by trial and error method. You can check all of my previous models in [Dogs models creator](https://github.com/Sladamos/DogsDetector/blob/main/models/creators/DogsModelsCreator.py). 
+
+It was created to detect one of 5 breeds:
 
 - Labrador
 - Doberman
