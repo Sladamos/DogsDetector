@@ -74,7 +74,7 @@ class Application(QMainWindow):
 
 
     def call_our_model(self):
-        self.model = self.model_loader.load_model("./newHope/saved/model_11")
+        self.model = self.model_loader.load_model("./newHope/saved/our")
 
     def call_transfered_model(self):
         self.model = self.model_loader.load_model("./newHope/saved/transfered")

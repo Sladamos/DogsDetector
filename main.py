@@ -42,30 +42,17 @@ def make_plots(results, name):
 
 def workbench():
 
-    batch_size = 64
+    batch_size = 32
+    dirs = os.listdir("./images/dogs/Images")
+    models_creator = DogsModelsCreator(len(dirs))
+    data_loader = DogsDataLoader(batch_size)
+    cnn_model = models_creator.create_advanced_neural_model()
+    train_data = data_loader.load_train_data()
+    validation_data = data_loader.load_validation_data()
     epochs = 10
     verbose = 1
-    image_size = 224
-    dataset_path = os.path.normpath("./images/dogs/Images")
-    training_set = datagen.flow_from_directory(dataset_path, target_size=(image_size, image_size),
-                                               batch_size=batch_size, class_mode='categorical', subset='training')
 
-    validation_set = datagen.flow_from_directory(dataset_path, target_size=(image_size, image_size),
-                                                 batch_size=batch_size, class_mode='categorical', subset='validation')
-    input_shape = (224, 224, 3)
-
-    dirs = os.listdir("./images/dogs/Images")
-    class_names = [dir.split('-', 1)[1] for dir in dirs]
-    models_creator = DogsModelsCreator(len(class_names))
-
-    # loader = TensorModelLoader()
-    # cnn_model = loader.load_model("./newHope/simple.h5")
-    cnn_model = models_creator.create_simple_neural_model(input_shape)
-    results = cnn_model.model.fit(x=training_set, validation_data=validation_set, epochs=epochs, batch_size=batch_size,
-                                  verbose=verbose)
-    make_plots(results, "loss_simple.png")
-    saver = TensorModelSaver()
-    saver.save_model(cnn_model, os.path.normpath("./newHope/simple.h5"))
+    results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
 
 
 def init_app():
@@ -83,25 +70,25 @@ def train_model():
     models_creator = DogsModelsCreator(len(dirs))
     data_loader = DogsDataLoader(batch_size)
     cnn_model = models_creator.create_simple_neural_model(input_shape=(224, 224, 3))
-    loader = TensorModelLoader()
-    cnn_model = loader.load_model("./newHope/saved/model_11")
+    #loader = TensorModelLoader()
+    #cnn_model = loader.load_model("./newHope/saved/our")
     saver = TensorModelSaver()
     train_data = data_loader.load_train_data()
     validation_data = data_loader.load_validation_data()
-    epochs = 15
-    verbose = 2
-    checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/model_11", monitor='val_accuracy', save_best_only=True)
-    earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=10)
+    epochs = 150
+    verbose = 1
+    checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/simple", monitor='val_accuracy', save_best_only=True)
+    earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=15)
 
     results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose, callbacks=[earlystop, checkpoint])
     #results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
-    saver.save_model(cnn_model, "./newHope/saved/model_11")
-    make_plots(results, "model_11.png")
+    saver.save_model(cnn_model, "./newHope/saved/simple")
+    make_plots(results, "simple.png")
 
 
 # workbench()
-# train_model()
-data_loader, model_loader, normalizator, class_names = init_app()
-app = QApplication(sys.argv)
-my_app = Application(data_loader, model_loader, normalizator, class_names)
-sys.exit(app.exec_())
+train_model()
+# data_loader, model_loader, normalizator, class_names = init_app()
+# app = QApplication(sys.argv)
+# my_app = Application(data_loader, model_loader, normalizator, class_names)
+# sys.exit(app.exec_())
