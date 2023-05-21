@@ -65,7 +65,7 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_gaussian_noise(0.0025))
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
@@ -76,11 +76,9 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_gaussian_noise(0.0025))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
-        #model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
-        #model.add_layer(layers_creator.create_dropout_layer(0.25))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
         return model
 
@@ -102,7 +100,7 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_gaussian_noise(0.0025))
         model.add_layer(layers_creator.create_convolution_layer(32, 3, 'relu', input_shape=input_shape))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(64, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
@@ -117,11 +115,11 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.1))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.0025))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.1))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
@@ -136,11 +134,11 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.4))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
@@ -155,16 +153,16 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.4))
         model.add_layer(layers_creator.create_dense_layer(self.number_of_breeds, activation='softmax'))
@@ -179,16 +177,16 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(256, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.4))
         model.add_layer(layers_creator.create_dense_layer(128, activation='relu'))
@@ -205,17 +203,17 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
@@ -236,21 +234,21 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.003))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.003))
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(512, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
         model.add_layer(layers_creator.create_dense_layer(256, activation='relu'))
@@ -269,21 +267,21 @@ class DogsModelsCreator(ModelsCreator):
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(64, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(128, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
         model.add_layer(layers_creator.create_gaussian_noise(0.004))
-        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu', input_shape=input_shape))
+        model.add_layer(layers_creator.create_convolution_layer(256, 3, 'relu'))
         model.add_layer(layers_creator.create_pool_layer((2, 2)))
         model.add_layer(layers_creator.create_dropout_layer(0.25))
 
-        model.add_layer(layers_creator.create_flatten_layer(input_shape=input_shape))
+        model.add_layer(layers_creator.create_flatten_layer())
         model.add_layer(layers_creator.create_dense_layer(1024, activation='relu'))
         model.add_layer(layers_creator.create_dropout_layer(0.5))
         model.add_layer(layers_creator.create_dense_layer(256, activation='relu'))
