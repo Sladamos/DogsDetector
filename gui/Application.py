@@ -76,11 +76,11 @@ class Application(QMainWindow):
     def call_our_model(self):
         self.model = self.model_loader.load_model("./newHope/simple")
         self.target_size = (224, 224)
-        dirs = os.listdir("./images/dogs/Images")
+        dirs = sorted(os.listdir("./images/dogs/Images"))
         self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
 
     def call_transfered_model(self):
         self.model = self.model_loader.load_model("./newHope/transfered")
         self.target_size = (224, 224)
-        dirs = os.listdir("./images/dogs/All_images")
+        dirs = sorted(os.listdir("./images/dogs/All_images"))
         self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
