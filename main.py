@@ -82,13 +82,9 @@ def train_model():
     validation_data = data_loader.load_validation_data()
     epochs = 150
     verbose = 1
-    checkpoint = tf.keras.callbacks.ModelCheckpoint("./newHope/simple", monitor='val_accuracy', save_best_only=True)
-    earlystop = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=15)
 
     results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size,
-                                              verbose=verbose, callbacks=[earlystop, checkpoint])
-    # results = cnn_model.train_with_validation(train_data, validation_data, epochs=epochs, batch_size=batch_size, verbose=verbose)
-    saver.save_model(cnn_model, "./newHope/saved/simple")
+                                              verbose=verbose, callbacks=[])
     make_plots(results, "simple.png")
 
 
@@ -106,3 +102,5 @@ data_loader, model_loader, normalizator = init_app()
 app = QApplication(sys.argv)
 my_app = Application(data_loader, model_loader, normalizator)
 sys.exit(app.exec_())
+
+# print(tf.config.list_physical_devices('GPU'))
