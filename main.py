@@ -8,7 +8,7 @@ from data.loaders.CifarDataLoader import CifarDataLoader
 from data.loaders.DogsDataLoader import DogsDataLoader
 from data.normalizators.DivideNormalizator import DivideNormalizator
 from displayer.DogsImagesDisplayer import DogsImagesDisplayer
-from gui.Application import Application
+from gui.QtApp import Application
 from models.comparators.ModelComparator import ModelComparator
 
 import tensorflow as tf
@@ -98,9 +98,9 @@ def print_images():
 # print_images()
 # workbench()
 # train_model()
-data_loader, model_loader, normalizator = init_app()
-app = QApplication(sys.argv)
-my_app = Application(data_loader, model_loader, normalizator)
-sys.exit(app.exec_())
-
+# data_loader, model_loader, normalizator = init_app()
+# app = QApplication(sys.argv)
+# my_app = Application(data_loader, model_loader, normalizator)
+# sys.exit(app.exec_())
+print("hello!")
 # print(tf.config.list_physical_devices('GPU'))

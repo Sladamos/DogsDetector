@@ -10,7 +10,6 @@ class Application(QMainWindow):
 
     def __init__(self, data_loader, model_loader, normalizator, title="Dogs detector"):
         super(Application, self).__init__()
-        loadUi("gui.ui", self)
         self.data_loader = data_loader
         self.target_size = None
         self.model_loader = model_loader
