@@ -22,7 +22,7 @@ class QtApp(QMainWindow, App):
         self.data = None
         self.show()
 
-    def select_image(self):
+    def select_image_path(self):
         path, _ = QFileDialog.getOpenFileName(self, "Select image", ".", filter="Images (*.jpg *.png *.bmp)")
 
         if path == "":
