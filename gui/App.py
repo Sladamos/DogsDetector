@@ -6,11 +6,9 @@ class App:
     def __init__(self, data_loader, data_normalizator, detector):
         self.image = None
         self.detector = detector
-        self.target_size = (224, 224)
         self.data_loader = data_loader
         self.data_normalizator = data_normalizator
-        self.select_simple_model()
-        self.show()
+        #self.select_simple_model()
 
     @abstractmethod
     def select_image_path(self):
@@ -27,8 +25,8 @@ class App:
             return self.detector.classify(self.image)
 
     def load_image(self, image_path):
-        self.data = self.data_loader.load_single_image(image_path, target_size=self.target_size)
-        self.data = self.data_normalizator.normalize(self.data)
+        self.image = self.data_loader.load_single_image(image_path)
+        self.image = self.data_normalizator.normalize(self.image)
 
     def select_simple_model(self):
         self.detector.select_mode("simple")
