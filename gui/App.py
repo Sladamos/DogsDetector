@@ -28,6 +28,12 @@ class App:
         self.image = self.data_loader.load_single_image(image_path)
         self.image = self.data_normalizator.normalize(self.image)
 
+    def forget_image(self):
+        self.image = None
+
+    def is_image_selected(self):
+        return self.image is not None
+
     def select_simple_model(self):
         self.detector.select_mode("simple")
 
