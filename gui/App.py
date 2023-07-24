@@ -8,7 +8,7 @@ class App:
         self.detector = detector
         self.data_loader = data_loader
         self.data_normalizator = data_normalizator
-        #self.select_simple_model()
+        self.select_simple_model()
 
     @abstractmethod
     def select_image_path(self):

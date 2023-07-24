@@ -45,6 +45,12 @@ class ConsoleApp(App):
     def disable_app(self):
         self.is_program_launched = False
 
+    def get_classification_result(self):
+        if self.is_image_selected():
+            return super().get_classification_result()
+        else:
+            print("Select image first")
+
     def __load_img(self):
         if self.image_path != "":
             self.load_image(self.image_path)
@@ -55,11 +61,4 @@ class ConsoleApp(App):
     def __print_options(self):
         for i in range(len(self.indexed_options)):
             print("%d: %s" % (i+1, self.indexed_options[i]))
-
-
-    def get_classification_result(self):
-        if self.is_image_selected():
-            return super().get_classification_result()
-        else:
-            print("Select image first")
 
