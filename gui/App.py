@@ -1,15 +1,13 @@
-import os
+from abc import abstractmethod
+
 
 class App:
 
-    def __init__(self, data_loader, model_loader):
-        self.class_names = None
+    def __init__(self, data_loader, detector):
         self.data = None
-        self.model = None
+        self.detector = detector
         self.target_size = (224, 224)
         self.data_loader = data_loader
-        self.model_loader = model_loader
-        self.set_label("")
         self.call_simple_model()
         self.show()
 
@@ -21,23 +19,17 @@ class App:
     def show(self):
         pass
 
-    def identify_image(self):
+    def get_classification_result(self):
         if self.data is None:
-            return
-
-        data = self.data
-        result = self.model.predict(data)[0]
-        self.set_label(self.class_names[result])
+            return "Incorrect image"
+        else:
+            return self.detector.classify(self.data)
 
     def set_data(self, data):
         self.data = data
 
     def call_simple_model(self):
-        self.model = self.model_loader.load_model("./newHope/simple")
-        dirs = sorted(os.listdir("./images/dogs/Images"))
-        self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
+        self.detector.select_mode("simple")
 
     def call_transfered_model(self):
-        self.model = self.model_loader.load_model("./newHope/transfered")
-        dirs = sorted(os.listdir("./images/dogs/All_images"))
-        self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
+        self.detector.select_mode("transfered")

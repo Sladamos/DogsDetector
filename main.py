@@ -1,3 +1,10 @@
+from gui import ConsoleApp
+
+app = ConsoleApp()
+app.show()
+
+
+
 import os
 import sys
 
