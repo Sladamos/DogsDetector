@@ -5,22 +5,20 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtGui
 from keras.utils import plot_model
 
+from gui.App import App
+
 
 class QtApp(QMainWindow, App):
 
-    def __init__(self, data_loader, model_loader, normalizator, title="Dogs detector"):
-        super(Application, self).__init__()
+    def __init__(self, data_loader, data_normalizator, detector, title="Dogs detector"):
+        QMainWindow.__init__(self)
+        App.__init__(self, data_loader, data_normalizator, detector)
         loadUi("gui.ui", self)
-        self.data_loader = data_loader
-        self.target_size = None
-        self.model_loader = model_loader
-        self.class_names = None
-        self.normalizator = normalizator
         self.initialize_default_values(title)
         self.initialize_buttons()
         self.initialize_radios()
         self.data = None
-        self.show()
+        # TODO rpeair
 
     def select_image_path(self):
         path, _ = QFileDialog.getOpenFileName(self, "Select image", ".", filter="Images (*.jpg *.png *.bmp)")
@@ -72,15 +70,3 @@ class QtApp(QMainWindow, App):
         self.our_model_button.clicked.connect(self.call_our_model)
         self.transfered_model_button.clicked.connect(self.call_transfered_model)
         self.call_our_model()
-
-    def call_our_model(self):
-        self.model = self.model_loader.load_model("./newHope/simple")
-        self.target_size = (224, 224)
-        dirs = sorted(os.listdir("./images/dogs/Images"))
-        self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
-
-    def call_transfered_model(self):
-        self.model = self.model_loader.load_model("./newHope/transfered")
-        self.target_size = (224, 224)
-        dirs = sorted(os.listdir("./images/dogs/All_images"))
-        self.class_names = [dir.split('-', 1)[1].replace("_", " ").capitalize() for dir in dirs]
