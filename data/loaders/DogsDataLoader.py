@@ -1,5 +1,6 @@
 import os
 
+from tensorflow import keras
 import numpy as np
 from keras.utils import image_utils
 
@@ -21,7 +22,7 @@ class DogsDataLoader(DataLoader):
         data = Data(validation_set, None)
         return data
 
-    def __init__(self, batch_size, path):
+    def __init__(self, batch_size=32, path=""):
         self.dataset_path = path
         self.batch_size = batch_size
         self.target_size = (224, 224)

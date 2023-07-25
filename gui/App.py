@@ -8,7 +8,11 @@ class App:
         self.detector = detector
         self.data_loader = data_loader
         self.data_normalizator = data_normalizator
-        self.select_simple_model()
+        self.select_transfered_model()
+        self.detector_modes = {
+            'simple': self.select_simple_model,
+            'transfered': self.select_transfered_model
+        }
 
     @abstractmethod
     def select_image_path(self):
@@ -33,6 +37,9 @@ class App:
 
     def is_image_selected(self):
         return self.image is not None
+
+    def get_detector_modes(self):
+        return self.detector_modes
 
     def select_simple_model(self):
         self.detector.select_mode("simple")

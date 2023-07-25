@@ -13,6 +13,7 @@ class ConsoleApp(App):
             "Select image path": self.select_image_path,
             "Load image": self.__load_img,
             "Get classification result": self.get_classification_result,
+            "Change detector mode": self.change_detector_mode,
             "Exit": self.disable_app
         }
         self.indexed_options = [key for key in self.app_options]
@@ -47,9 +48,23 @@ class ConsoleApp(App):
 
     def get_classification_result(self):
         if self.is_image_selected():
-            return super().get_classification_result()
+            print(super().get_classification_result())
         else:
             print("Select image first")
+
+    def change_detector_mode(self):
+        detector_modes = self.get_detector_modes()
+        for mode in detector_modes:
+            print(mode)
+        mode = input('Select detector mode: ')
+        if mode in detector_modes:
+            try:
+                detector_modes[mode]()
+                print("Mode selected properly")
+            except:
+                print("It's not possible to select this mode")
+        else:
+            print("Incorrect detector mode")
 
     def __load_img(self):
         if self.image_path != "":
@@ -61,4 +76,3 @@ class ConsoleApp(App):
     def __print_options(self):
         for i in range(len(self.indexed_options)):
             print("%d: %s" % (i+1, self.indexed_options[i]))
-

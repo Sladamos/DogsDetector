@@ -6,8 +6,8 @@ class DogsDetectorsFactory(DetectorsFactory):
     def __init__(self, model_loader):
         self.model_loader = model_loader
         self.models_paths = {
-            "simple": "./simple_model",
-            "transfered": "./transfered_model"
+            "simple": "./created_models/simple_model",
+            "transfered": "./created_models/transfered_model"
         }
 
         self.images_paths = {
