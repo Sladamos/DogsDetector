@@ -1,13 +1,15 @@
 import os
 import sys
 
+from PyQt5.QtWidgets import QApplication
 from keras.preprocessing.image import ImageDataGenerator
 
 from data.loaders.DogsDataLoader import DogsDataLoader
 from data.normalizators.DivideNormalizator import DivideNormalizator
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
 from gui.ConsoleApp import ConsoleApp
-#from displayer.DogsImagesDisplayer import DogsImagesDisplayer
+from gui.QtApp import QtApp
+# from displayer.DogsImagesDisplayer import DogsImagesDisplayer
 from models.comparators.ModelComparator import ModelComparator
 
 import tensorflow as tf
@@ -96,8 +98,7 @@ def print_images():
 # workbench()
 # train_model()
 data_loader, data_normalizator, detector = init_app()
-# app = QApplication(sys.argv)
-# my_app = Application(data_loader, model_loader, normalizator)
-app = ConsoleApp(data_loader, data_normalizator, detector)
-app.show()
-# sys.exit(app.exec_())
+app = QApplication(sys.argv)
+my_app = QtApp(data_loader, data_normalizator, detector)
+my_app.show()
+sys.exit(app.exec_())

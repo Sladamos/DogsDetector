@@ -3,12 +3,14 @@ from abc import abstractmethod
 
 class App:
 
-    def __init__(self, data_loader, data_normalizator, detector):
+    def __init__(self, data_loader=None, data_normalizator=None, detector=None):
+        if detector is None:
+            return
         self.image = None
         self.detector = detector
         self.data_loader = data_loader
         self.data_normalizator = data_normalizator
-        self.select_transfered_model()
+        self.select_simple_model()
         self.detector_modes = {
             'simple': self.select_simple_model,
             'transfered': self.select_transfered_model
