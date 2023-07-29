@@ -1,15 +1,13 @@
+import json
 import os
 import sys
 
-from PyQt5.QtWidgets import QApplication
 from keras.preprocessing.image import ImageDataGenerator
 
 from data.loaders.DogsDataLoader import DogsDataLoader
 from data.normalizators.DivideNormalizator import DivideNormalizator
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
 from gui.ConsoleApp import ConsoleApp
-from gui.QtApp import QtApp
-# from displayer.DogsImagesDisplayer import DogsImagesDisplayer
 from models.comparators.ModelComparator import ModelComparator
 
 import tensorflow as tf
@@ -17,6 +15,7 @@ import matplotlib.pyplot as plt
 from models.creators.DogsModelsCreator import DogsModelsCreator
 from models.loaders.TensorModelLoader import TensorModelLoader
 from models.savers.TensorModelSaver import TensorModelSaver
+from option.app.ConsoleAppOption import ConsoleAppOption
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -97,8 +96,35 @@ def print_images():
 # print_images()
 # workbench()
 # train_model()
-data_loader, data_normalizator, detector = init_app()
-app = QApplication(sys.argv)
-my_app = QtApp(data_loader, data_normalizator, detector)
-my_app.show()
-sys.exit(app.exec_())
+
+def open_config(file_name):
+    try:
+        f = open(file_name)
+        config = json.load(f)
+        f.close()
+    except:
+        print("Problem with config.json")
+        exit(404)
+    return config
+
+
+def main():
+    options = {
+        "console": ConsoleAppOption()
+    }
+    if len(sys.argv) != 2:
+        print("Please give one of options specified in config.json")
+        return
+    option_str = sys.argv[1]
+    if option_str in options:
+        config = open_config("config.json")
+        option = options[option_str]
+        option.execute(config[option_str])
+
+
+main()
+
+# app = QApplication(sys.argv)
+# my_app = QtApp(data_loader, data_normalizator, detector)
+# my_app.show()
+# sys.exit(app.exec_())

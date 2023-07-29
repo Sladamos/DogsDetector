@@ -12,4 +12,4 @@ RUN ["pip", "install", "matplotlib"]
 
 RUN ["pip", "install", "scipy"]
 
-CMD ["python", "main.py"]
+ENTRYPOINT ["python", "main.py"]
