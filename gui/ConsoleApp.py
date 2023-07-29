@@ -6,9 +6,10 @@ from gui.App import App
 
 class ConsoleApp(App):
 
-    def __init__(self, data_loader, data_normalizator, detector):
-        super().__init__(data_loader, data_normalizator, detector)
+    def __init__(self, data_loader, data_normalizer, detector, app_title):
+        super().__init__(data_loader, data_normalizer, detector)
         self.image_path = ""
+        self.app_title = app_title
         self.app_options = {
             "Select image path": self.select_image_path,
             "Load image": self.__load_img,
@@ -31,7 +32,7 @@ class ConsoleApp(App):
 
     def show(self):
         self.is_program_launched = True
-
+        print(self.app_title)
         while self.is_program_launched:
             self.__print_options()
             option = input('Select option: ')

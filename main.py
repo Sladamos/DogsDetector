@@ -5,7 +5,7 @@ import sys
 from keras.preprocessing.image import ImageDataGenerator
 
 from data.loaders.DogsDataLoader import DogsDataLoader
-from data.normalizators.DivideNormalizator import DivideNormalizator
+from data.normalizers.DivideNormalizer import DivideNormalizer
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
 from gui.ConsoleApp import ConsoleApp
 from models.comparators.ModelComparator import ModelComparator
@@ -59,7 +59,7 @@ def workbench():
 
 def init_app():
     data_loader = DogsDataLoader()
-    data_normalizator = DivideNormalizator(255.0)
+    data_normalizator = DivideNormalizer(255.0)
     model_loader = TensorModelLoader()
     detector = DogsDetectorsFactory(model_loader).create_detector()
     return data_loader, data_normalizator, detector
@@ -110,21 +110,27 @@ def open_config(file_name):
 
 def main():
     options = {
-        "console": ConsoleAppOption()
+        "console": [ConsoleAppOption, "app"]
+        #"qt": [, "console_app"]
+        #"transfered": [, "console_app"]
+        #"simple": [, "console_app"]
     }
     if len(sys.argv) != 2:
-        print("Please give one of options specified in config.json")
+        print("Please give one of program options:")
+        print(options)
         return
     option_str = sys.argv[1]
     if option_str in options:
         config = open_config("config.json")
         option = options[option_str]
-        option.execute(config[option_str])
+        option_config = config[option[1]]
+        option = option[0]()
+        option.execute(option_config)
 
 
 main()
 
 # app = QApplication(sys.argv)
-# my_app = QtApp(data_loader, data_normalizator, detector)
+# my_app = QtApp(data_loader, data_normalizer, detector)
 # my_app.show()
 # sys.exit(app.exec_())

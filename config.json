@@ -1,5 +1,32 @@
 {
-  "console": {
-
+  "app": {
+    "console": {
+      "app_title": "Dogs Detector",
+      "detected_type": "dog",
+      "selected_model": "transferred",
+      "initializer_type": "tensorflow"
+    },
+    "qt": {
+      "app_title": "Dogs Detector",
+      "detected_type": "dog",
+      "selected_model": "transferred",
+      "initializer_type": "tensorflow"
+    },
+    "init": {
+      "types": {
+        "dog": {
+          "models": {
+            "simple": {
+              "model_path": "./created_models/simple_model",
+              "classes_path": "./created_models/simple_model_classes"
+            },
+            "transferred": {
+              "model_path": "./created_models/transferred_model",
+              "classes_path": "./created_models/transferred_model_classes"
+            }
+          }
+        }
+      }
+    }
   }
 }

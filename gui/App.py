@@ -3,13 +3,13 @@ from abc import abstractmethod
 
 class App:
 
-    def __init__(self, data_loader=None, data_normalizator=None, detector=None):
+    def __init__(self, data_loader=None, data_normalizer=None, detector=None):
         if detector is None:
             return
         self.image = None
         self.detector = detector
         self.data_loader = data_loader
-        self.data_normalizator = data_normalizator
+        self.data_normalizer = data_normalizer
         self.select_simple_model()
         self.detector_modes = {
             'simple': self.select_simple_model,
@@ -32,7 +32,7 @@ class App:
 
     def load_image(self, image_path):
         self.image = self.data_loader.load_single_image(image_path)
-        self.image = self.data_normalizator.normalize(self.image)
+        self.image = self.data_normalizer.normalize(self.image)
 
     def forget_image(self):
         self.image = None

@@ -1,12 +1,12 @@
 from data.loaders.DogsDataLoader import DogsDataLoader
-from data.normalizators.DivideNormalizator import DivideNormalizator
+from data.normalizers.DivideNormalizer import DivideNormalizer
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
+from initializers.AppInitializer import AppInitializer
 from models.loaders.TensorModelLoader import TensorModelLoader
-from option.Option import Option
 
 
-class TensorflowAppInit(Option):
-    def __init__(self):
+class TensorflowAppInitializer(AppInitializer):
+    def __init__(self, config):
         self.data_loaders = {
             "dog": lambda: DogsDataLoader
         }
@@ -14,12 +14,11 @@ class TensorflowAppInit(Option):
         self.detectors_factories = {
             "dog": lambda x: DogsDetectorsFactory
         }
+        self.config = config
 
-    def execute(self, config):
-        #TODO config
-        detected_type = "dog"
+    def initialize_app(self, detected_type):
         data_loader = self.data_loaders[detected_type]()
-        data_normalizer = DivideNormalizator(255.0)
+        data_normalizer = DivideNormalizer(255.0)
         model_loader = TensorModelLoader()
         detectors_factory = self.detectors_factories[detected_type](model_loader)
         return data_loader, data_normalizer, detectors_factory

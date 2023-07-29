@@ -1,8 +1,8 @@
 from data.Data import Data
-from data.normalizators.Normalizator import Normalizator
+from data.normalizers.Normalizer import Normalizer
 
 
-class DivideNormalizator(Normalizator):
+class DivideNormalizer(Normalizer):
     def __init__(self, divider):
         self.divider = divider
 

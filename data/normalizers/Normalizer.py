@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 
-class Normalizator:
+class Normalizer:
     @abstractmethod
     def normalize(self, image):
         pass
