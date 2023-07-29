@@ -18,11 +18,11 @@
           "models": {
             "simple": {
               "model_path": "./created_models/simple_model",
-              "classes_path": "./created_models/simple_model_classes"
+              "classes_path": "./created_models/classes/simple_model.txt"
             },
             "transferred": {
               "model_path": "./created_models/transferred_model",
-              "classes_path": "./created_models/transferred_model_classes"
+              "classes_path": "./created_models/classes/transferred_model.txt"
             }
           }
         }

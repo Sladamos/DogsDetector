@@ -6,10 +6,10 @@ from gui.App import App
 
 class ConsoleApp(App):
 
-    def __init__(self, data_loader, data_normalizer, detector, app_title):
-        super().__init__(data_loader, data_normalizer, detector)
+    def __init__(self, data_loader, data_normalizer, detector, app_config):
+        super().__init__(data_loader, data_normalizer, detector, app_config["selected_model"])
         self.image_path = ""
-        self.app_title = app_title
+        self.app_title = app_config["app_title"]
         self.app_options = {
             "Select image path": self.select_image_path,
             "Load image": self.__load_img,
@@ -24,6 +24,7 @@ class ConsoleApp(App):
         self.forget_image()
         image_path = input('Select image path: ')
         image_path = os.path.normpath(image_path)
+        print(image_path)
         if not os.path.isfile(image_path) or imghdr.what(image_path) is None:
             image_path = ""
             print("Incorrect image path")

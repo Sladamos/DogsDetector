@@ -7,5 +7,5 @@ class ConsoleAppOption(AppOption):
         app_config = config["console"]
         init_config = config["init"]
         data_loader, data_normalizer, detector = self.initialize_app(init_config, app_config)
-        app = ConsoleApp(data_loader, data_normalizer, detector, app_config["app_title"])
+        app = ConsoleApp(data_loader, data_normalizer, detector, app_config)
         app.show()

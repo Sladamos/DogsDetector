@@ -63,5 +63,5 @@ class QtApp(QMainWindow, App):
         self.our_model_button.setChecked(True)
         self.modelGroup.setExclusive(True)
         self.our_model_button.clicked.connect(self.select_simple_model)
-        self.transfered_model_button.clicked.connect(self.select_transfered_model)
+        self.transfered_model_button.clicked.connect(self.select_transferred_model)
 

@@ -3,18 +3,18 @@ from abc import abstractmethod
 
 class App:
 
-    def __init__(self, data_loader=None, data_normalizer=None, detector=None):
+    def __init__(self, data_loader=None, data_normalizer=None, detector=None, init_model=None):
         if detector is None:
             return
         self.image = None
         self.detector = detector
         self.data_loader = data_loader
         self.data_normalizer = data_normalizer
-        self.select_simple_model()
         self.detector_modes = {
             'simple': self.select_simple_model,
-            'transfered': self.select_transfered_model
+            'transferred': self.select_transferred_model
         }
+        self.detector_modes[init_model]()
 
     @abstractmethod
     def select_image_path(self):
@@ -46,5 +46,5 @@ class App:
     def select_simple_model(self):
         self.detector.select_mode("simple")
 
-    def select_transfered_model(self):
-        self.detector.select_mode("transfered")
+    def select_transferred_model(self):
+        self.detector.select_mode("transferred")

@@ -8,11 +8,11 @@ from models.loaders.TensorModelLoader import TensorModelLoader
 class TensorflowAppInitializer(AppInitializer):
     def __init__(self, config):
         self.data_loaders = {
-            "dog": lambda: DogsDataLoader
+            "dog": lambda: DogsDataLoader()
         }
 
         self.detectors_factories = {
-            "dog": lambda x: DogsDetectorsFactory
+            "dog": lambda x, y: DogsDetectorsFactory(x, y)
         }
         self.config = config
 
@@ -20,5 +20,6 @@ class TensorflowAppInitializer(AppInitializer):
         data_loader = self.data_loaders[detected_type]()
         data_normalizer = DivideNormalizer(255.0)
         model_loader = TensorModelLoader()
-        detectors_factory = self.detectors_factories[detected_type](model_loader)
-        return data_loader, data_normalizer, detectors_factory
+        detectors_factory = self.detectors_factories[detected_type](model_loader, self.config["types"][detected_type]["models"])
+        detector = detectors_factory.create_detector()
+        return data_loader, data_normalizer, detector

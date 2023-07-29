@@ -111,9 +111,9 @@ def open_config(file_name):
 def main():
     options = {
         "console": [ConsoleAppOption, "app"]
-        #"qt": [, "console_app"]
-        #"transfered": [, "console_app"]
-        #"simple": [, "console_app"]
+        # "qt": [, "console_app"]
+        # "transfered": [, "console_app"]
+        # "simple": [, "console_app"]
     }
     if len(sys.argv) != 2:
         print("Please give one of program options:")
