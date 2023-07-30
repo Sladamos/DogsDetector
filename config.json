@@ -1,16 +1,18 @@
 {
   "app": {
     "console": {
-      "app_title": "Dogs Detector",
+      "app_title": "Dogs detector",
       "detected_type": "dog",
       "selected_model": "transferred",
       "initializer_type": "tensorflow"
     },
     "qt": {
-      "app_title": "Dogs Detector",
+      "app_title": "Dogs detector",
       "detected_type": "dog",
       "selected_model": "transferred",
-      "initializer_type": "tensorflow"
+      "initializer_type": "tensorflow",
+      "gui_file": "gui.ui",
+      "default_image_path": "./images/default.jpg"
     },
     "init": {
       "types": {
@@ -26,6 +28,35 @@
             }
           }
         }
+      }
+    }
+  },
+  "train": {
+    "simple": {
+      "detected_type": "dog",
+      "training_set_path": "TODO",
+      "model_path": "TODO",
+      "validation": true,
+      "validation_set_path": "TODO",
+      "library": "tensorflow",
+      "plots": {
+
+      }
+    },
+    "transferred" : {
+      "detected_type": "dog",
+      "training_set_path": "TODO",
+      "model_path": "TODO",
+      "validation": true,
+      "validation_set_path": "TODO",
+      "library": "tensorflow",
+      "plots": {
+
+      }
+    },
+    "init": {
+      "tensorflow": {
+        "batch": "TODO AND MORE"
       }
     }
   }

@@ -1,21 +1,20 @@
 import os
-import sys
 
 from PyQt5.QtWidgets import QDialog, QFileDialog, QApplication, QMainWindow
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui
-from keras.utils import plot_model
 
 from gui.App import App
 
 
 class QtApp(QMainWindow, App):
 
-    def __init__(self, data_loader, data_normalizer, detector):
+    def __init__(self, data_loader, data_normalizer, detector, app_config):
         super(QMainWindow, self).__init__()
-        App.__init__(self, data_loader, data_normalizer, detector)
-        loadUi("gui.ui", self)
-        self.initialize_default_values("Dogs detector")
+        App.__init__(self, data_loader, data_normalizer, detector, app_config["selected_model"])
+        loadUi(app_config["gui_file"], self)
+        self.app_config = app_config
+        self.initialize_default_values()
         self.initialize_buttons()
         self.initialize_radios()
 
@@ -44,14 +43,14 @@ class QtApp(QMainWindow, App):
             result = self.get_classification_result()
             self.set_label(self.class_names[result])
 
-    def initialize_default_values(self, title):
+    def initialize_default_values(self):
         self.setStyleSheet("background-color: rgb(105, 50, 110);"
                            "color: rgb(255, 255, 255);"
                            "font-family: \"Georgia, serif\";")
         self.output_label.setStyleSheet("font-size: 18px;")
-        self.setWindowTitle(title)
+        self.setWindowTitle(self.app_config["app_title"])
         self.set_label("")
-        self.on_path_updated(os.path.normpath("images/default.jpg"))
+        self.on_path_updated(os.path.normpath(self.app_config["default_image_path"]))
 
     def initialize_buttons(self):
         self.select_image_button.clicked.connect(self.select_image_path)

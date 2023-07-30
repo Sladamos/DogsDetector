@@ -7,14 +7,13 @@ from keras.preprocessing.image import ImageDataGenerator
 from data.loaders.DogsDataLoader import DogsDataLoader
 from data.normalizers.DivideNormalizer import DivideNormalizer
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
-from gui.ConsoleApp import ConsoleApp
-from models.comparators.ModelComparator import ModelComparator
 
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from models.creators.DogsModelsCreator import DogsModelsCreator
 from models.loaders.TensorModelLoader import TensorModelLoader
 from models.savers.TensorModelSaver import TensorModelSaver
+from option.app.QtAppOption import QtAppOption
 from option.app.ConsoleAppOption import ConsoleAppOption
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -86,17 +85,6 @@ def train_model():
     # trainer class, it should also save classes names in some binary file
 
 
-def print_images():
-    displayer = DogsImagesDisplayer()
-    displayer.display_image_with_gaussian_noise(os.path.normpath("./images/dingo.jpg"), 0.3)
-    # displayer.display_images()
-    # displayer.display_transformed_image()
-
-
-# print_images()
-# workbench()
-# train_model()
-
 def open_config(file_name):
     try:
         f = open(file_name)
@@ -110,27 +98,21 @@ def open_config(file_name):
 
 def main():
     options = {
-        "console": [ConsoleAppOption, "app"]
-        # "qt": [, "console_app"]
-        # "transfered": [, "console_app"]
-        # "simple": [, "console_app"]
+        "console": [ConsoleAppOption, "app"],
+        "qt": [QtAppOption, "app"]
+        #"transferred": [, "console_app"]
+        #"simple": [, "console_app"]
     }
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or sys.argv[1] not in options:
         print("Please give one of program options:")
         print(options)
         return
     option_str = sys.argv[1]
-    if option_str in options:
-        config = open_config("config.json")
-        option = options[option_str]
-        option_config = config[option[1]]
-        option = option[0]()
-        option.execute(option_config)
+    config = open_config("config.json")
+    option, config_name = options[option_str]
+    option_config = config[config_name]
+    option = option()
+    option.execute(option_config)
 
 
 main()
-
-# app = QApplication(sys.argv)
-# my_app = QtApp(data_loader, data_normalizer, detector)
-# my_app.show()
-# sys.exit(app.exec_())
