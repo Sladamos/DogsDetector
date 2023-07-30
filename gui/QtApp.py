@@ -41,7 +41,7 @@ class QtApp(QMainWindow, App):
     def identify_image(self):
         if self.is_image_selected():
             result = self.get_classification_result()
-            self.set_label(self.class_names[result])
+            self.set_label(result)
 
     def initialize_default_values(self):
         self.setStyleSheet("background-color: rgb(105, 50, 110);"

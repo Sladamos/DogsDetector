@@ -11,6 +11,6 @@ class QtAppOption(AppOption):
         init_config = config["init"]
         data_loader, data_normalizer, detector = self.initialize_app(init_config, app_config)
         app = QApplication(sys.argv)
-        my_app = QtApp(data_loader, data_normalizer, detector. app_config)
+        my_app = QtApp(data_loader, data_normalizer, detector, app_config)
         my_app.show()
         sys.exit(app.exec_())
