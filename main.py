@@ -105,7 +105,7 @@ def main():
     }
     if len(sys.argv) != 2 or sys.argv[1] not in options:
         print("Please give one of program options:")
-        print(options)
+        [print(option) for option in options]
         return
     option_str = sys.argv[1]
     config = open_config("config.json")
