@@ -15,6 +15,8 @@ from models.loaders.TensorModelLoader import TensorModelLoader
 from models.savers.TensorModelSaver import TensorModelSaver
 from option.app.QtAppOption import QtAppOption
 from option.app.ConsoleAppOption import ConsoleAppOption
+from option.train.TrainSimpleOption import TrainSimpleOption
+from option.train.TrainTransferredOption import TrainTransferredOption
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -100,8 +102,8 @@ def main():
     options = {
         "console": [ConsoleAppOption, "app"],
         "qt": [QtAppOption, "app"]
-        #"transferred": [, "console_app"]
-        #"simple": [, "console_app"]
+        "transferred": [TrainTransferredOption, "console_app"],
+        "simple": [TrainSimpleOption, "console_app"]
     }
     if len(sys.argv) != 2 or sys.argv[1] not in options:
         print("Please give one of program options:")

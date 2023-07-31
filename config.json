@@ -41,6 +41,7 @@
       "init": {
         "selected_type": "tensorflow",
         "tensorflow": {
+          "train_from_existing_model": false,
           "batch_size": 64,
           "epochs": 150,
           "verbose": 1,
@@ -71,6 +72,7 @@
       "init": {
         "selected_type": "tensorflow",
         "tensorflow": {
+          "train_from_existing_model": true,
           "batch_size": 32,
           "epochs": 1,
           "verbose": 1,
