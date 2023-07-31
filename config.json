@@ -34,29 +34,61 @@
   "train": {
     "simple": {
       "detected_type": "dog",
-      "training_set_path": "TODO",
-      "model_path": "TODO",
+      "training_set_path": "./images/simple_dogs",
+      "model_path": "./created_models/simple_model",
       "validation": true,
-      "validation_set_path": "TODO",
-      "library": "tensorflow",
+      "validation_set_path": "./images/simple_dogs",
+      "init": {
+        "selected_type": "tensorflow",
+        "tensorflow": {
+          "batch_size": 64,
+          "epochs": 150,
+          "verbose": 1,
+          "use_checkpoint": true,
+          "input_shape": [224, 224, 3]
+        }
+      },
       "plots": {
-
+        "accuracy": {
+          "draw_plot": true,
+          "to_file": true,
+          "file_path": "./plots/simple_acc.png"
+        },
+        "loss": {
+          "draw_plot": false,
+          "to_file": false,
+          "file_path": "./plots/simple_lose.png"
+        }
       }
     },
     "transferred" : {
       "detected_type": "dog",
-      "training_set_path": "TODO",
-      "model_path": "TODO",
+      "source_model": "inception",
+      "training_set_path": "./images/all_dogs",
+      "model_path": "./created_models/transferred_model",
       "validation": true,
-      "validation_set_path": "TODO",
-      "library": "tensorflow",
+      "validation_set_path": "./images/all_dogs",
+      "init": {
+        "selected_type": "tensorflow",
+        "tensorflow": {
+          "batch_size": 32,
+          "epochs": 1,
+          "verbose": 1,
+          "use_checkpoint": true,
+          "input_shape": [224, 224, 3]
+        }
+      },
       "plots": {
-
-      }
-    },
-    "init": {
-      "tensorflow": {
-        "batch": "TODO AND MORE"
+        "accuracy": {
+          "draw_plot": true,
+          "to_file": false,
+          "file_path": "./plots/transferred_acc.png"
+        },
+        "loss": {
+          "draw_plot": false,
+          "to_file": false,
+          "file_path": "./plots/transferred_lose.png"
+        }
       }
     }
   }
