@@ -1,13 +1,13 @@
 from abc import ABC
 
-from initializers.TensorflowAppInitializer import TensorflowAppInitializer
+from initializers.app.TensorflowAppInitializer import TensorflowAppInitializer
 from option.Option import Option
 
 
 class AppOption(Option, ABC):
     def __init__(self):
         self.initializers = {
-            "tensorflow": TensorflowAppInitializer
+            "tensorflow": lambda x: TensorflowAppInitializer(x)
         }
 
     def initialize_app(self, init_config, app_config):

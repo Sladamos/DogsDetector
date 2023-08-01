@@ -38,10 +38,10 @@
       "model_path": "./created_models/simple_model",
       "validation": true,
       "validation_set_path": "./images/simple_dogs",
-      "init": {
-        "selected_type": "tensorflow",
+      "trainer_type": "tensorflow",
+      "train_from_existing_model": false,
+      "training_features": {
         "tensorflow": {
-          "train_from_existing_model": false,
           "batch_size": 64,
           "epochs": 150,
           "verbose": 1,
@@ -69,10 +69,10 @@
       "model_path": "./created_models/transferred_model",
       "validation": true,
       "validation_set_path": "./images/all_dogs",
-      "init": {
-        "selected_type": "tensorflow",
+      "trainer_type": "tensorflow",
+      "train_from_existing_model": true,
+      "training_features": {
         "tensorflow": {
-          "train_from_existing_model": true,
           "batch_size": 32,
           "epochs": 1,
           "verbose": 1,

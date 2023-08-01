@@ -1,7 +1,7 @@
 from data.loaders.DogsDataLoader import DogsDataLoader
 from data.normalizers.DivideNormalizer import DivideNormalizer
 from detector.DogsDetectorsFactory import DogsDetectorsFactory
-from initializers.AppInitializer import AppInitializer
+from initializers.app.AppInitializer import AppInitializer
 from models.loaders.TensorModelLoader import TensorModelLoader
 
 
