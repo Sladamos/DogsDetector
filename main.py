@@ -101,9 +101,9 @@ def open_config(file_name):
 def main():
     options = {
         "console": [ConsoleAppOption, "app"],
-        "qt": [QtAppOption, "app"]
-        "transferred": [TrainTransferredOption, "console_app"],
-        "simple": [TrainSimpleOption, "console_app"]
+        "qt": [QtAppOption, "app"],
+        "transferred": [TrainTransferredOption, "train"],
+        "simple": [TrainSimpleOption, "train"]
     }
     if len(sys.argv) != 2 or sys.argv[1] not in options:
         print("Please give one of program options:")

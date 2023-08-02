@@ -7,10 +7,13 @@ from keras.preprocessing.image import image_utils
 
 
 class CifarDataLoader(DataLoader):
+    def load_validation_data(self, path=""):
+        pass
+
     def __init__(self):
         self.cifar10 = keras.datasets.cifar10
 
-    def load_train_data(self):
+    def load_train_data(self, path=""):
         (train_images, train_labels), (test_images, test_labels) = self.cifar10.load_data()
         data = Data(train_images, train_labels)
         return data

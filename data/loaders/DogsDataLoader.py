@@ -11,11 +11,11 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 class DogsDataLoader(DataLoader):
 
-    def load_validation_data(self):
+    def load_validation_data(self, path):
         datagen = ImageDataGenerator(
             rescale=1. / 255,
             validation_split=0.2)
-        validation_set = datagen.flow_from_directory(self.dataset_path, target_size=self.target_size,
+        validation_set = datagen.flow_from_directory(path, target_size=self.target_size,
                                                      batch_size=self.batch_size, class_mode='categorical',
                                                      subset='validation')
 
@@ -27,7 +27,7 @@ class DogsDataLoader(DataLoader):
         self.batch_size = batch_size
         self.target_size = (224, 224)
 
-    def load_train_data(self):
+    def load_train_data(self, path):
         datagen = ImageDataGenerator(
             rescale=1. / 255,
             shear_range=0.05,
@@ -37,7 +37,7 @@ class DogsDataLoader(DataLoader):
             validation_split=0.2,
             width_shift_range=0.2,
             height_shift_range=0.2)
-        training_set = datagen.flow_from_directory(self.dataset_path, target_size=self.target_size,
+        training_set = datagen.flow_from_directory(path, target_size=self.target_size,
                                                    batch_size=self.batch_size, class_mode='categorical',
                                                    subset='training')
 

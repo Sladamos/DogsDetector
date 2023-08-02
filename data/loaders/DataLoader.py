@@ -3,7 +3,7 @@ from abc import abstractmethod
 
 class DataLoader:
     @abstractmethod
-    def load_train_data(self):
+    def load_train_data(self, path):
         pass
 
     @abstractmethod
@@ -11,7 +11,7 @@ class DataLoader:
         pass
 
     @abstractmethod
-    def load_validation_data(self):
+    def load_validation_data(self, path):
         pass
 
     @abstractmethod

@@ -40,6 +40,7 @@
       "validation_set_path": "./images/simple_dogs",
       "trainer_type": "tensorflow",
       "train_from_existing_model": false,
+      "existing_model_path": "./created_models/simple_model",
       "training_features": {
         "tensorflow": {
           "batch_size": 64,
@@ -64,13 +65,13 @@
     },
     "transferred" : {
       "detected_type": "dog",
-      "source_model": "inception",
-      "training_set_path": "./images/all_dogs",
+      "training_set_path": "./images/simple_dogs",
       "model_path": "./created_models/transferred_model",
       "validation": true,
-      "validation_set_path": "./images/all_dogs",
+      "validation_set_path": "./images/simple_dogs",
       "trainer_type": "tensorflow",
       "train_from_existing_model": true,
+      "existing_model_path": "./created_models/transferred_model",
       "training_features": {
         "tensorflow": {
           "batch_size": 32,
