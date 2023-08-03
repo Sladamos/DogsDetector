@@ -1,9 +1,10 @@
 from option.train.TrainOption import TrainOption
+from trainers.TransferredTrainer import TransferredTrainer
 
 
 class TrainTransferredOption(TrainOption):
-    def get_config_name(self):
-        return "transferred"
 
-    def create_raw_model(self, models_creator, input_shape):
-        return models_creator.create_advanced_neural_model(input_shape=input_shape)
+    def execute(self, config):
+        app_config = config["transferred"]
+        trainer = TransferredTrainer()
+        self.execute_training(app_config, trainer)
