@@ -1,0 +1,25 @@
+from data.loaders.DogsDataLoader import DogsDataLoader
+from data.normalizers.DivideNormalizer import DivideNormalizer
+from detector.DogsDetectorsFactory import DogsDetectorsFactory
+from initializers.app.AppInitializer import AppInitializer
+from models.loaders.TensorModelLoader import TensorModelLoader
+
+
+class TensorflowAppInitializer(AppInitializer):
+    def __init__(self, config):
+        self.data_loaders = {
+            "dog": lambda: DogsDataLoader()
+        }
+
+        self.detectors_factories = {
+            "dog": lambda x, y: DogsDetectorsFactory(x, y)
+        }
+        self.config = config
+
+    def initialize_app(self, detected_type):
+        data_loader = self.data_loaders[detected_type]()
+        data_normalizer = DivideNormalizer(255.0)
+        model_loader = TensorModelLoader()
+        detectors_factory = self.detectors_factories[detected_type](model_loader, self.config["types"][detected_type]["models"])
+        detector = detectors_factory.create_detector()
+        return data_loader, data_normalizer, detector

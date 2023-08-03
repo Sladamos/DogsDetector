@@ -1,0 +1,114 @@
+{
+  "app": {
+    "console": {
+      "app_title": "Dogs detector",
+      "detected_type": "dog",
+      "selected_model": "transferred",
+      "initializer_type": "tensorflow"
+    },
+    "qt": {
+      "app_title": "Dogs detector",
+      "detected_type": "dog",
+      "selected_model": "transferred",
+      "initializer_type": "tensorflow",
+      "gui_file": "gui.ui",
+      "default_image_path": "./images/default.jpg"
+    },
+    "init": {
+      "types": {
+        "dog": {
+          "models": {
+            "simple": {
+              "model_path": "./created_models/simple_model",
+              "classes_path": "./created_models/classes/simple_model.txt"
+            },
+            "transferred": {
+              "model_path": "./created_models/transferred_model",
+              "classes_path": "./created_models/classes/transferred_model.txt"
+            }
+          }
+        }
+      }
+    }
+  },
+  "train": {
+    "simple": {
+      "detected_type": "dog",
+      "training_set_path": "./images/simple_dogs",
+      "validation": true,
+      "validation_set_path": "./images/simple_dogs",
+      "trainer_type": "tensorflow",
+      "train_from_existing_model": false,
+      "existing_model_path": "./created_models/simple_model",
+      "training_features": {
+        "tensorflow": {
+          "batch_size": 64,
+          "epochs": 20,
+          "verbose": 1,
+          "input_shape": [224, 224, 3]
+        }
+      },
+      "callbacks": {
+          "checkpoint": {
+            "use_checkpoint": true,
+            "checkpoint_path": "./created_models/simple_model"
+          }
+      },
+      "save": {
+        "model_path": "./created_models/simple_model",
+        "classes_path": "./created_models/classes/simple_model.txt"
+      },
+      "plots": {
+        "accuracy": {
+          "draw_plot": true,
+          "to_file": true,
+          "file_path": "./plots/simple_acc.png"
+        },
+        "loss": {
+          "draw_plot": false,
+          "to_file": false,
+          "file_path": "./plots/simple_lose.png"
+        }
+      }
+    },
+    "transferred" : {
+      "detected_type": "dog",
+      "training_set_path": "./images/simple_dogs",
+      "validation": true,
+      "validation_set_path": "./images/simple_dogs",
+      "trainer_type": "tensorflow",
+      "train_from_existing_model": true,
+      "existing_model_path": "./created_models/transferred_model",
+      "training_features": {
+        "tensorflow": {
+          "batch_size": 32,
+          "epochs": 1,
+          "verbose": 1,
+          "input_shape": [224, 224, 3]
+        }
+      },
+      "callbacks": {
+          "checkpoint": {
+            "use_checkpoint": true,
+            "checkpoint_path": "./created_models/transferred_model"
+          }
+      },
+      "save": {
+        "model_path": "./created_models/transferred_model",
+        "classes_path": "./created_models/classes/transferred_model.txt"
+      },
+      "plots": {
+        "accuracy": {
+          "draw_plot": true,
+          "to_file": false,
+          "file_path": "./plots/transferred_acc.png"
+        },
+        "loss": {
+          "draw_plot": false,
+          "to_file": false,
+          "file_path": "./plots/transferred_lose.png"
+        }
+      }
+    }
+  }
+}

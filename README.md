@@ -2,16 +2,16 @@
 
 ## Description
 
-This project is a simple application to detect dogs breeds. It was created for my undergraduate course - "Artificial Intelligence". The main goal was to create a simple CNN model which can detect a few dogs breeds.
+This project is a simple application for recognizing dog breeds. It was created for my undergraduate course - "Artificial Intelligence". The main goal was to create a simple CNN model which can detect a few dogs breeds.
 
 # Dataset
 
-To complete this task I selected **The Stanford Dogs** dataset. It contains 120 breeds with about 150 images per breed.
+To complete this task I chose **The Stanford Dogs** dataset. It contains 120 breeds with about 150 images per breed.
 ![dogsImages](images/dogsImages.png "Dataset")
 
 # Data augmentation
 
-As the result of a little number of images per breed, it was reasonable to use data augmentation technique.
+Due to the small number of images per breed, it was reasonable to use data augmentation technique.
 
 To apply it I've implemented below Image generator.
 
